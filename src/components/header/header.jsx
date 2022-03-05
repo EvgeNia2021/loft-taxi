@@ -1,7 +1,10 @@
 import React from "react";
 
-const Header = () => {
+class Header extends React.Component {
+  render() {
+    const { navigateTo } = this.props
     return (
+      <>
         <header className="header">
             <div className="container">
                 <div className="header__topline">
@@ -9,17 +12,17 @@ const Header = () => {
                 <nav>
             <ul>
               <li>
-                <button onClick={() => this.navigateTo("map")}>
+                <button onClick={() => navigateTo("map")}>
                   Карта
                 </button>
               </li>
               <li>
-                <button onClick={() => this.navigateTo("profile")}>
+                <button onClick={() => navigateTo("profile")}>
                   Профиль
                 </button>
               </li>
               <li>
-                <button onClick={() => this.navigateTo("loginPage")}>
+                <button onClick={() => navigateTo("loginPage")}>
                   Выйти
                 </button>
               </li>
@@ -29,7 +32,9 @@ const Header = () => {
                 </div>
             </div>
         </header>
+        </>
     );
-};
+}
+}
 
 export default Header;

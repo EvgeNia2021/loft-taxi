@@ -1,7 +1,10 @@
 import React from "react";
 
-export const Registration = () => {
-  return <>
+class Registration extends React.Component {
+  render() {
+    const { navigateTo } = this.props
+    return (
+ <>
   <h1 className="registration__title">Войти</h1>
     <form>
       <label htmlFor="email">Email*</label>
@@ -11,12 +14,15 @@ export const Registration = () => {
       <label htmlFor="password">Придумайте пароль*</label>
       <input id="password" type="password" name="password" size="16" />
     </form>
-    <button onClick={() => this.navigateTo("map")}>
+    <button onClick={() => navigateTo("map")}>
       Зарегистрироваться
     </button>
     <div className="registration__subtitle">
       Уже зарегистрированы?
     </div>
-    <button onClick={() => this.navigateTo("loginPage")}>Войти</button>
+    <button onClick={() => navigateTo("loginPage")}>Войти</button>
   </>
+  );
 }
+}
+export default Registration;

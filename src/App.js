@@ -1,54 +1,54 @@
 import './App.css';
 import React from 'react';
 import { Profile } from "./pages/profile/profile";
-import { Map } from "./pages/map/map";
-import { LoginPage } from "./pages/login/login";
-import { Registration } from "./pages/registration/registration";
+import Map from "./pages/map/map";
+import LoginPage from "./pages/login/login";
+import Registration from "./pages/registration/registration";
+import Header from "../src/components/header/header";
 
 const PAGES = {
-  map: <Map />,
-  profile: <Profile />,
-  loginPage: <LoginPage />,
-  registration: <Registration />
+  map: Map,
+  profile: Profile,
+  loginPage: LoginPage,
+  registration: Registration
 }
 
 class App extends React.Component {
-  state = { currentPage: "loginPage" };
+  state = { page: "loginPage" };
 
   navigateTo = (page) => {
-    this.setState({ currentPage: page });
+    this.setState({ page });
   }
   render() {
-    return (
-      <>
-        {/* <header>
-          <nav>
-            <ul>
-              <li>
-                <button onClick={() => this.navigateTo("map")}>
-                  Карта
-                </button>
-              </li>
-              <li>
-                <button onClick={() => this.navigateTo("profile")}>
-                  Профиль
-                </button>
-              </li>
-              <li>
-                <button onClick={() => this.navigateTo("loginPage")}>
-                  Выйти
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </header> */}
-        <main>
-          <section>
-            {PAGES[this.state.currentPage]}
-          </section>
-        </main>
-      </>
-    );
+    const Page = PAGES[this.state.page]
+    const noHeaderLogin = PAGES.loginPage
+    const noHeaderReg = PAGES.registration
+
+    console.log(noHeaderLogin)
+    console.log(Page)
+    if (noHeaderLogin === Page) {
+      return (
+        <>
+          <Page navigateTo={this.navigateTo} />
+
+        </>
+      );
+    }
+    if (noHeaderReg === Page) {
+      return (
+        <>
+          <Page navigateTo={this.navigateTo} />
+
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Page navigateTo={this.navigateTo} />
+          <Header navigateTo={this.navigateTo} />
+        </>
+      );
+    }
   }
 }
 

@@ -1,9 +1,14 @@
 import React from "react";
-import Header from "../../components/header/header";
+// import Header from "../../components/header/header";
 
-export const Map = () => {
-  return <>
-    <Header />
+class Map extends React.Component {
+  render() {
+  return ( 
+  <>
+    Карта
     {/* <OrderForm /> */}
   </>
+  );
 }
+}
+export default Map;
