@@ -24,9 +24,7 @@ class App extends React.Component {
     const noHeaderLogin = PAGES.loginPage
     const noHeaderReg = PAGES.registration
 
-    console.log(noHeaderLogin)
-    console.log(Page)
-    if (noHeaderLogin === Page) {
+    if ((noHeaderLogin === Page) || (noHeaderReg === Page)) {
       return (
         <>
           <Page navigateTo={this.navigateTo} />
@@ -34,14 +32,7 @@ class App extends React.Component {
         </>
       );
     }
-    if (noHeaderReg === Page) {
-      return (
-        <>
-          <Page navigateTo={this.navigateTo} />
-
-        </>
-      );
-    } else {
+    else {
       return (
         <>
           <Page navigateTo={this.navigateTo} />
