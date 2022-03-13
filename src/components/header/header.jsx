@@ -1,14 +1,8 @@
-import React, {Component} from "react";
-import { withAuth } from '../../authContext'
+import React, { Component } from "react";
 
 class Header extends Component {
-  unauthorize = (event) => {
-    event.preventDefault();
-    this.props.logOut();
-    this.props.navigate("loginPage")
-  }
   render() {
-    const { navigateTo } = this.props
+    // const { navigateTo } = this.props
     return (
       <>
         <header className="header">
@@ -18,17 +12,17 @@ class Header extends Component {
                 <nav>
                   <ul>
                     <li>
-                      <button onClick={() => navigateTo("map")}>
+                      <button onClick={() => this.props.navigate("map")}>
                         Карта
                       </button>
                     </li>
                     <li>
-                      <button onClick={() => navigateTo("profile")}>
+                      <button onClick={() => this.props.navigate("profile")}>
                         Профиль
                       </button>
                     </li>
                     <li>
-                      <button onClick={this.unauthorize}>
+                      <button onClick={this.props.unauthorize}>
                         Выйти
                       </button>
                     </li>
