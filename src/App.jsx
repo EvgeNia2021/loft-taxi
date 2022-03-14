@@ -25,10 +25,10 @@ class App extends React.Component {
 
 
   navigateTo = (page) => {
-    if (this.props.isLoggedIn) {
+    if (this.props.isLoggedIn || page === "loginPage" || page === "registration") {
       this.setState({ page });
     } else {
-      this.setState({ page: "loginPage", page: "registration" });
+      this.setState({ page: "loginPage"});
     }
   }
   render() {
