@@ -4,37 +4,42 @@ import { ProfileWithAuth } from "./pages/profile/profile";
 import { Map } from "./pages/map/map";
 import { LoginWithAuth } from "./pages/login/login";
 import { Registration } from "./pages/registration/registration";
-import { withAuth } from './authContext';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logOut } from './actions'
+import { Routes, Route } from "react-router-dom";
+import { PrivateRoute } from "./privateRoute";
 
-const PAGES = {
-  map: (props) => <Map {...props} />,
-  profile: (props) => <ProfileWithAuth {...props} />,
-  loginPage: (props) => <LoginWithAuth {...props} />,
-  registration: (props) => <Registration {...props} />
-}
 
 class App extends React.Component {
-  state = { page: "loginPage" };
+
 
   unauthorize = (event) => {
     event.preventDefault();
-    this.props.logOut();
-    this.navigateTo("loginPage")
+    logOut();
   }
 
-
-  navigateTo = (page) => {
-    if (this.props.isLoggedIn || page === "loginPage" || page === "registration") {
-      this.setState({ page });
-    } else {
-      this.setState({ page: "loginPage"});
-    }
-  }
   render() {
     return (
       <>
-        <section>{PAGES[this.state.page]({ navigate: this.navigateTo, unauthorize: this.unauthorize })}</section>
+        <section>
+          <Routes>
+            <Route exact path="/" element={<LoginWithAuth />} />
+            <Route exact path="/map" element={<Map />} />
+            <Route exact path="/profile" element={<ProfileWithAuth />} />
+            {/* <Route exact path="/map" element={
+            <PrivateRoute>
+              <Map />
+            </PrivateRoute>
+          } />
+            <Route path="/profile" element={
+            <PrivateRoute>
+              <ProfileWithAuth />
+            </PrivateRoute>
+          } /> */}
+            <Route exact path="/registration" element={<Registration />} />
+          </Routes>
+        </section>
       </>
     );
   }
@@ -43,4 +48,7 @@ class App extends React.Component {
 App.propTypes = {
   isLoggedIn: PropTypes.bool
 };
-export default withAuth(App);
+export default connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn }),
+  // { logOut }
+)(App);

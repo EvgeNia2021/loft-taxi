@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
 
 export class Registration extends Component {
   render() {
@@ -19,7 +20,7 @@ export class Registration extends Component {
         <div className="registration__subtitle">
           Уже зарегистрированы?
         </div>
-        <button onClick={() => this.props.navigate("loginPage")}>Войти</button>
+        <Link to="/profile">Войти</Link>
       </>
     );
   }

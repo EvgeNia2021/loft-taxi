@@ -1,6 +1,15 @@
 import React, { Component } from "react";
+import { logOut } from "../../actions"
+import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+
 
 class Header extends Component {
+  unauthorize = (event) => {
+    event.preventDefault();
+    this.props.logOut();
+  };
+
   render() {
     // const { navigateTo } = this.props
     return (
@@ -12,19 +21,13 @@ class Header extends Component {
                 <nav>
                   <ul>
                     <li>
-                      <button onClick={() => this.props.navigate("map")}>
-                        Карта
-                      </button>
+                      <Link to="/map">Карта</Link>
                     </li>
                     <li>
-                      <button onClick={() => this.props.navigate("profile")}>
-                        Профиль
-                      </button>
+                      <Link to="/profile">Профиль</Link>
                     </li>
                     <li>
-                      <button onClick={this.props.unauthorize}>
-                        Выйти
-                      </button>
+                      <button onClick={this.unauthorize}>Выйти</button>
                     </li>
                   </ul>
                 </nav>
@@ -37,4 +40,7 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export const HeaderWithLinks = connect(
+  null,
+  { logOut }
+)(Header);

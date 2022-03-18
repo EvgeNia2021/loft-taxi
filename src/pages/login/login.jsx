@@ -1,29 +1,22 @@
 import React, { Component } from "react";
-import { withAuth } from "../../authContext"
 import PropTypes from 'prop-types';
+import { connect } from "react-redux"
+import { authorize } from "../../actions";
+import { Link } from "react-router-dom"
 
 export class LoginPage extends Component {
   authorize = (event) => {
     event.preventDefault()
     const { email, password } = event.target;
-    this.props.logIn(email.value, password.value)
+    this.props.authorize(email.value, password.value)
   }
-  goToProfilePage = (event) => {
-    event.preventDefault();
-    this.props.navigate("profile")
-  }
-
-  goToRegPage = (event) => {
-    event.preventDefault();
-    this.props.navigate("registration")
-  }
-
+ 
   render() {
 
     return (
       <>
         {this.props.isLoggedIn ? (
-          <p>Вы авторизированы <button onClick={this.goToProfilePage}>Перейти в профиль</button></p>
+          <p>Вы авторизированы <Link to="/profile">Перейти в профиль</Link></p>
         ) : (
           <div>
             <form onSubmit={this.authorize}>
@@ -43,7 +36,7 @@ export class LoginPage extends Component {
                 Новый пользователь?
               </div>
             </form>
-            <button onClick={this.goToRegPage}>Регистрация</button>
+            <Link to="/registration">Регистрация</Link>
           </div>
         )}
       </>
@@ -56,4 +49,7 @@ LoginPage.propTypes = {
   logIn: PropTypes.func,
   navigate: PropTypes.func,
 };
-export const LoginWithAuth = withAuth(LoginPage);
+export const LoginWithAuth = connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn }),
+  { authorize }
+)(LoginPage);
