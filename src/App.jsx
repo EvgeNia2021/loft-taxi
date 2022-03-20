@@ -5,19 +5,18 @@ import { Map } from "./pages/map/map";
 import { LoginWithAuth } from "./pages/login/login";
 import { Registration } from "./pages/registration/registration";
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logOut } from './actions'
-import { Routes, Route } from "react-router-dom";
-import { PrivateRoute } from "./privateRoute";
+import { connect, useSelector } from 'react-redux';
+import { Routes, Route, Navigate } from "react-router-dom";
+
+
+const ProtectedPage = ({ component }) => {
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+
+  return isLoggedIn ? component : <Navigate to='/' />
+}
 
 
 class App extends React.Component {
-
-
-  unauthorize = (event) => {
-    event.preventDefault();
-    logOut();
-  }
 
   render() {
     return (
@@ -25,19 +24,9 @@ class App extends React.Component {
         <section>
           <Routes>
             <Route exact path="/" element={<LoginWithAuth />} />
-            <Route exact path="/map" element={<Map />} />
-            <Route exact path="/profile" element={<ProfileWithAuth />} />
-            {/* <Route exact path="/map" element={
-            <PrivateRoute>
-              <Map />
-            </PrivateRoute>
-          } />
-            <Route path="/profile" element={
-            <PrivateRoute>
-              <ProfileWithAuth />
-            </PrivateRoute>
-          } /> */}
             <Route exact path="/registration" element={<Registration />} />
+            <Route path='/map' element={<ProtectedPage component={<Map />} />} />
+            <Route path='/profile' element={<ProtectedPage component={<ProfileWithAuth />} />} />
           </Routes>
         </section>
       </>
@@ -49,6 +38,5 @@ App.propTypes = {
   isLoggedIn: PropTypes.bool
 };
 export default connect(
-  (state) => ({ isLoggedIn: state.auth.isLoggedIn }),
-  // { logOut }
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn })
 )(App);

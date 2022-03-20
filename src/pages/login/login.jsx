@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux"
 import { authorize } from "../../actions";
 import { Link } from "react-router-dom"
+// import { ProfileWithAuth } from "../profile/profile";
+import { Navigate} from "react-router-dom";
 
 export class LoginPage extends Component {
   authorize = (event) => {
@@ -15,9 +17,8 @@ export class LoginPage extends Component {
 
     return (
       <>
-        {this.props.isLoggedIn ? (
-          <p>Вы авторизированы <Link to="/profile">Перейти в профиль</Link></p>
-        ) : (
+       
+         {this.props.isLoggedIn ? <Navigate to='/map' /> : (
           <div>
             <form onSubmit={this.authorize}>
               <h1 className="login__title">Войти</h1>
@@ -28,17 +29,14 @@ export class LoginPage extends Component {
               <div className="login__forgot">
                 Забыли пароль?
               </div>
-              <button type="submit">
-
-                Войти
-              </button>
+              <button to="/profile" type="submit">Войти</button>
               <div className="login__subtitle">
                 Новый пользователь?
               </div>
             </form>
             <Link to="/registration">Регистрация</Link>
           </div>
-        )}
+        )} 
       </>
     );
   }

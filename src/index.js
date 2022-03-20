@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import { MuiThemeProvider } from '@material-ui/core'
-// import { createMuiTheme } from '@material-ui/core/styles'
+// import { createTheme } from "@material-ui/core/styles"
 import { theme } from './loft-taxi-theme'
 import { BrowserRouter } from "react-router-dom"
 import { Provider } from 'react-redux';
