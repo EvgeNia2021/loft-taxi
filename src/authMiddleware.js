@@ -8,7 +8,6 @@ export const authMiddleware = (store) => (next) => async (action) => {
     if (success) {
       store.dispatch(logIn())
     }
-  } else {
-    next(action);
   }
+  next(action)
 };

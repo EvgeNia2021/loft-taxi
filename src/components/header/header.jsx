@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { logOut } from "../../actions"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import { connect } from "react-redux"
+import { Link } from "@material-ui/core";
 
 
 class Header extends Component {
@@ -27,7 +28,7 @@ class Header extends Component {
                       <Link to="/profile">Профиль</Link>
                     </li>
                     <li>
-                      <button onClick={this.unauthorize}>Выйти</button>
+                      <Link onClick={this.unauthorize}>Выйти</Link>
                     </li>
                   </ul>
                 </nav>

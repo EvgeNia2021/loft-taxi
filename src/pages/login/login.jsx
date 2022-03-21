@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux"
 import { authorize } from "../../actions";
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 // import { ProfileWithAuth } from "../profile/profile";
 import { Navigate} from "react-router-dom";
+import { Link, Button, Input, FormLabel } from "@material-ui/core";
 
 export class LoginPage extends Component {
   authorize = (event) => {
@@ -22,14 +23,14 @@ export class LoginPage extends Component {
           <div>
             <form onSubmit={this.authorize}>
               <h1 className="login__title">Войти</h1>
-              <label htmlFor="email">Email:</label>
-              <input id="email" type="email" name="email" size="16" />
-              <label htmlFor="password">Пароль:</label>
-              <input id="password" type="password" name="password" size="16" />
+              <FormLabel htmlFor="email">Email:</FormLabel>
+              <Input id="email" type="email" name="email" size="16" />
+              <FormLabel htmlFor="password">Пароль:</FormLabel>
+              <Input id="password" type="password" name="password" size="16" />
               <div className="login__forgot">
                 Забыли пароль?
               </div>
-              <button to="/profile" type="submit">Войти</button>
+              <Button to="/profile" type="submit">Войти</Button>
               <div className="login__subtitle">
                 Новый пользователь?
               </div>
