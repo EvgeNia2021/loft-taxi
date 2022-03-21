@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { logOut } from "../../actions"
-// import { Link } from "react-router-dom"
 import { connect } from "react-redux"
-import { Link } from "@material-ui/core";
-
+import { LinkNav } from "../themeConverter/themeConverter"
 
 class Header extends Component {
   unauthorize = (event) => {
@@ -22,13 +20,13 @@ class Header extends Component {
                 <nav>
                   <ul>
                     <li>
-                      <Link to="/map">Карта</Link>
+                      <LinkNav to="/map">Карта</LinkNav>
                     </li>
                     <li>
-                      <Link to="/profile">Профиль</Link>
+                      <LinkNav to="/profile">Профиль</LinkNav>
                     </li>
                     <li>
-                      <Link onClick={this.unauthorize}>Выйти</Link>
+                      <LinkNav to="/login" onClick={this.unauthorize}>Выйти</LinkNav>
                     </li>
                   </ul>
                 </nav>

@@ -12,3 +12,11 @@ export const serverLogIn = data =>
     },
     method: 'POST'
   }).then(res => res.json());
+
+  export const addCard = data =>
+  fetch("https://loft-taxi.glitch.me/card", {
+  headers: {
+    "Content-Type": "application/json"
+  },
+  method: "POST"
+}).then(res => res.json());

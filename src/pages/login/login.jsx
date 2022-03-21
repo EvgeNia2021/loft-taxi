@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux"
 import { authorize } from "../../actions";
-// import { Link } from "react-router-dom"
-// import { ProfileWithAuth } from "../profile/profile";
 import { Navigate} from "react-router-dom";
-import { Link, Button, Input, FormLabel } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { Button, Input, FormLabel } from "@material-ui/core";
+
 
 export class LoginPage extends Component {
   authorize = (event) => {
@@ -35,7 +35,7 @@ export class LoginPage extends Component {
                 Новый пользователь?
               </div>
             </form>
-            <Link to="/registration">Регистрация</Link>
+            <Link to="/registration"><Button>Регистрация</Button></Link>
           </div>
         )} 
       </>

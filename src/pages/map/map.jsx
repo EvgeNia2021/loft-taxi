@@ -23,7 +23,7 @@ export class Map extends Component {
   render() {
     return(
     <>
-    <HeaderWithLinks navigate={this.props.navigate} unauthorize={this.props.unauthorize}/>
+    <HeaderWithLinks unauthorize={this.props.unauthorize}/>
     <div className="map-wrapper">
       <div data-testid="map" className="map" ref={this.mapContainer} />
     </div>
