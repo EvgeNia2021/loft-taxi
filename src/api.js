@@ -15,6 +15,7 @@ export const serverLogIn = data =>
 
   export const addCard = data =>
   fetch("https://loft-taxi.glitch.me/card", {
+  body: JSON.stringify(data),
   headers: {
     "Content-Type": "application/json"
   },

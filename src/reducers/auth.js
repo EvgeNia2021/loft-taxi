@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, AUTH_TOKEN } from "../actions"
+import { LOG_IN, LOG_OUT } from "../actions"
 
 const initialState = {
   isLoggedIn: false
@@ -9,12 +9,13 @@ export default function (state = initialState, action) {
     case LOG_IN: {
       return {
         isLoggedIn: true,
-        token: AUTH_TOKEN
+        token: action.payload
       }
     }
     case LOG_OUT: {
       return {
-        isLoggedIn: false
+        isLoggedIn: false,
+        token: null
 
       }
     }

@@ -29,7 +29,7 @@ export class Profile extends Component {
               <Input id="expiryDate" name="expiryDate" size="16" />
               <FormLabel htmlFor="cvc">CVC</FormLabel>
               <Input id="cvc" name="cvc" size="16" />
-              <Link to="/profile"><Button  type="submit">Сохранить</Button></Link>
+              <Button  type="submit">Сохранить</Button>
             </form>
            
             </div>
