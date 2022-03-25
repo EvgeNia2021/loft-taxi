@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 import auth from "./auth"
-import storeCard from "./storeCard";
+import { cardReducer } from "./card";
 
-export default combineReducers({ auth, storeCard })
+export default combineReducers({ auth, card: cardReducer })

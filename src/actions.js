@@ -12,6 +12,4 @@ export const authorize = (email, password) => ({
 export const addCard = (cardNumber, expiryDate, cardName, cvc, token) => ({
   type: ADD_CARD, payload: { cardNumber, expiryDate, cardName, cvc, token },
 })
-export const cardToStore = (cardNumber, expiryDate, cardName, cvc, token) => ({
-  type: CARD_TO_STORE, payload: { cardNumber, expiryDate, cardName, cvc, token },
-})
+export const cardToStore = data => ({ type: CARD_TO_STORE, payload: data })
