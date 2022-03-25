@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+::placeholder {
+  color: #828282;
+  }
+  
+
 .map-wrapper {
   position: relative;
   width: 100%;

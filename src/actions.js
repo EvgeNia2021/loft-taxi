@@ -9,7 +9,7 @@ export const logOut = () => ({ type: LOG_OUT })
 export const authorize = (email, password) => ({
   type: AUTHORIZE, payload: { email, password },
 })
-export const addCard = (cardNumber, expiryDate, cardName, cvc, token) => ({
-  type: ADD_CARD, payload: { cardNumber, expiryDate, cardName, cvc, token },
+export const addCard = (cardNumber, expiryDate, cardName, cvc) => ({
+  type: ADD_CARD, payload: { cardNumber, expiryDate, cardName, cvc},
 })
 export const cardToStore = data => ({ type: CARD_TO_STORE, payload: data })

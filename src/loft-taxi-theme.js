@@ -22,7 +22,9 @@ export const theme = createTheme({
   overrides: {
     MuiFormLabel: {
       root: {
-        fontWeight: 500,
+        fontWeight: 700,
+        fontSize: 16,
+        color: "000",
         "&$focused": {
           color: "#000"
         }
@@ -40,6 +42,9 @@ export const theme = createTheme({
           "border-bottom-color": "#1473e6"
         }
       }
+      // "&:placeholder": {
+      //   color: "#828282"
+      // }
     },
     MuiFormHelperText: {
       root: {
@@ -47,9 +52,18 @@ export const theme = createTheme({
         bottom: "-1.2em"
       }
     },
+    MuiPaper: {
+      root: {
+        width: 580,
+        height: 541,
+        padding: "56px 73px",
+      }
+    },
     MuiButton: {
       root: {
-        textTransform: 'none'
+        textTransform: 'none',
+        padding: "16px 141px",
+        borderRadius: 70
       },
       containedPrimary: {
         boxShadow: "none",
