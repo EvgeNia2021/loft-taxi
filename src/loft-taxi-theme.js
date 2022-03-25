@@ -16,7 +16,7 @@ export const theme = createTheme({
       main: "#FDBF5A"
     },
     secondary: {
-      main: "#ff0000"
+      main: "#1C1A19"
     }
   },
   overrides: {
@@ -36,6 +36,12 @@ export const theme = createTheme({
         cursor: "pointer"
       }
     },
+    MuiAppBar: {
+      root: {
+      height: 102,
+    }
+    },
+
     MuiInput: {
       underline: {
         "&:after": {
@@ -54,8 +60,6 @@ export const theme = createTheme({
     },
     MuiPaper: {
       root: {
-        width: 580,
-        height: 541,
         padding: "56px 73px",
       }
     },

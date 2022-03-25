@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux"
 import { authorize } from "../../actions";
-import { Navigate, NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Button, Input, FormLabel, Paper } from "@material-ui/core";
 import Logo from "../../components/sideLogo/sideLogo"
 import { LinkNav } from "../../components/themeConverter/themeConverter"
@@ -24,7 +23,7 @@ export class LoginPage extends Component {
           <div className="login__container">
             <Logo />
             <div className="login__form">
-            <Paper elevation={3}>
+            <Paper elevation={3} className="login__paper">
             <form className="form__text" onSubmit={this.authorize}>
               <h1 className="form__title">Войти</h1>
               <div className="form__group">
@@ -42,7 +41,7 @@ export class LoginPage extends Component {
                 variant="contained" color="primary" to="/profile" type="submit">Войти</Button>
             </form>
             <div className="login__new">
-            <div className="login__subtitle">
+            <div className="subtitle">
                 Новый пользователь?
               </div>
             <LinkNav to="/registration">Регистрация</LinkNav>

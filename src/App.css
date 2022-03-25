@@ -12,18 +12,16 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+/* 
 .header {
   position: relative;
   background-color: #1C1A19;
-  /* min-height: 100vh; */
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: row;
   align-items: center;
-  /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -53,7 +51,7 @@
 
 .login__form {
   height: 100vh;
-    background: url("./img/mapBackground.png") no-repeat 50% 50% / cover;
+    background: url("./img/mapBackground.png") no-repeat 100% 100% / cover;
     flex: 1;
     display: flex;
     align-items: center;
@@ -98,6 +96,62 @@ color: #828282;
   color: #828282;
 }
 
-.login__subtitle {
+.subtitle {
   margin-right: 5px;
+}
+
+.header {
+position: relative;
+}
+
+.header__topline {
+  height: 102px;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1C1A19;
+    padding: 0px 50px 0px 27px;
+}
+.header__links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__link {
+margin-right: 15px;
+}
+
+.header__link:last-child {
+  margin-right: 0;
+  }
+
+  
+  .map-wrapper {
+      width: 100%;
+      height: 100vh;
+  }
+  
+.mapboxgl-ctrl {
+  display: none;
+}
+
+.login__paper {
+  
+  width: 580px;
+  height: 541px;
+}
+
+.profile__form {
+  height: 100vh;
+  background: url("./img/mapBackground.png") no-repeat 100% 100% / cover;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__paper {
+
+  width: 888px;
+  height: 588px;
 }
