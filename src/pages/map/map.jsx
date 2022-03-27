@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import { HeaderWithLinks } from "../../components/header/header";
+import { OrderForm } from "./orderForm";
 
 export class Map extends Component {
   map = null;
@@ -24,9 +25,10 @@ export class Map extends Component {
     return(
     <>
     <HeaderWithLinks unauthorize={this.props.unauthorize}/>
-    <div className="map-wrapper">
+    <OrderForm />
+    {/* <div className="map-wrapper"> */}
       <div data-testid="map" className="map" ref={this.mapContainer} />
-    </div>
+    {/* </div> */}
     </>
     );
   }

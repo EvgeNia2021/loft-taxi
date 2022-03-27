@@ -44,13 +44,11 @@ export const theme = createTheme({
 
     MuiInput: {
       underline: {
-        "&:after": {
-          "border-bottom-color": "#1473e6"
-        }
-      }
-      // "&:placeholder": {
-      //   color: "#828282"
-      // }
+        "&:before": {
+          "border-bottom-color": "transparent"
+        },
+        width: "100%",
+      },
     },
     MuiFormHelperText: {
       root: {
@@ -60,7 +58,7 @@ export const theme = createTheme({
     },
     MuiPaper: {
       root: {
-        padding: "56px 73px",
+       
       }
     },
     MuiButton: {

@@ -3,6 +3,7 @@ export const LOG_OUT = "LOG_OUT"
 export const AUTHORIZE = "AUTHORIZE"
 export const ADD_CARD = "ADD_CARD"
 export const CARD_TO_STORE = "CARD_TO_STORE"
+export const FETCH_ADDRESS_LIST = "FETCH_ADDRESS_LIST"
 
 export const logIn = token => ({ type: LOG_IN, payload: token })
 export const logOut = () => ({ type: LOG_OUT })

@@ -11,7 +11,7 @@ export class Registration extends Component {
         <div className="login__container">
           <Logo />
           <div className="login__form">
-            <Paper elevation={3}>
+            <Paper elevation={3} className="registration__paper">
               <form className="form__text">
                 <h1 className="form__title">Регистрация</h1>
                 <div className="form__group">

@@ -68,6 +68,7 @@
 
 .form__input {
   width: 100%;
+  border-bottom: 1px solid #E0E0E0;
 }
 
 
@@ -102,6 +103,7 @@ color: #828282;
 
 .header {
 position: relative;
+z-index: 10000;
 }
 
 .header__topline {
@@ -136,7 +138,7 @@ margin-right: 15px;
 }
 
 .login__paper {
-  
+  padding: 56px 73px;
   width: 580px;
   height: 541px;
 }
@@ -151,7 +153,132 @@ margin-right: 15px;
 }
 
 .profile__paper {
-
+  padding: 56px 73px;
   width: 888px;
   height: 588px;
+}
+
+
+.order {
+  z-index: 10000;
+  position: relative;
+    width: 486px;
+    height: 471px;
+    margin-top: 59px;
+    margin-left: 59px;
+}
+
+.order__top {
+  margin-bottom: 23px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 25px;
+}
+
+.order__bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 46px 32px;
+}
+
+.order__choice {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.order__option:last-child{
+  margin-right: 0;
+}
+
+.order__option {
+  padding: 11px;
+  margin-right: 20px;
+  width: 106px;
+  height: 167px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.order__name{
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.order__cost {
+  font-size: 11px;
+  color: #828282;
+  margin-bottom: 1px;
+}
+
+.order__price {
+font-size: 24px;
+font-weight: 400;
+margin-bottom: 13px;
+}
+
+.f24 {
+  font-size: 24px;
+}
+
+.order__car {
+  background-image: url("./img/car1.png");
+  width: 95px;
+  height: 73px;
+  align-self: center;
+}
+.order__car2 {
+  background-image: url("./img/car2.png");
+  width: 118px;
+  height: 81px;
+  align-self: center;
+}
+.order__car3 {
+  background-image: url("./img/car3.png");
+  width: 100px;
+  height: 64px;
+  align-self: center;
+  margin-top: 6px;
+}
+
+.order__wrapper {
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.order__icon {
+  width: 14px;
+  height: 16px;
+  margin-right: 16px;
+}
+
+
+.order__input {
+  height: 60px;
+  
+}
+
+.order__controls {
+  display: inline-flex;
+  align-items: center;
+}
+
+.order__cross {
+  border-right: 1px solid #E0E0E0;
+  margin-right: 11px;
+  padding-right: 11px;
+}
+
+
+.order__tick {
+  margin-bottom: 3px;
+}
+
+.registration__paper {
+padding: 72px 113px;
 }
