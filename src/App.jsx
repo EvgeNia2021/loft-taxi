@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import React from 'react';
 import { ProfileWithAuth } from "./pages/profile/profile";
 import { Map } from "./pages/map/map";

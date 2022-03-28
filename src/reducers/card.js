@@ -12,7 +12,7 @@ export const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case CARD_TO_STORE: {
       return { ...action.payload,
-        cardAdded: true, }
+        cardAdded: true }
     }
     default:
       return state

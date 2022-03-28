@@ -2,16 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-// import reportWebVitals from './reportWebVitals';
 import { MuiThemeProvider } from '@material-ui/core'
-// import { createTheme } from "@material-ui/core/styles"
 import { theme } from './loft-taxi-theme'
 import { BrowserRouter } from "react-router-dom"
 import { Provider } from 'react-redux';
 import { store } from "./store"
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
@@ -21,7 +19,8 @@ ReactDOM.render(
         </MuiThemeProvider>
       </Provider>
     </BrowserRouter>
-  </React.StrictMode>,
+  // </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 

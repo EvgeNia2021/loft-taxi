@@ -1,27 +1,24 @@
 import React, { Component } from "react";
 import { HeaderWithLinks } from "../../components/header/header";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Button, Input, FormLabel, Paper, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { addCard } from "../../actions";
 import PropTypes from 'prop-types';
 
 
-// const useStyles = makeStyles({
-//   profile__paper: {
-//     backgroundColor: "violet",
-//   }
-// })
 export class Profile extends Component {
   
   addCard = (event) => {
     event.preventDefault()
     const { cardName, cardNumber, expiryDate, cvc } = event.target;
     this.props.addCard(cardName.value, cardNumber.value, expiryDate.value, cvc.value)
+    
   }
 
+  
+
   render() {
-    // const classes = this.useStyles()
     console.log(this.props.card)
     return (
       <>
@@ -72,6 +69,6 @@ Profile.propTypes = {
 };
 
 export const ProfileWithAuth = connect(
-  state => ({ card: state.card }),
+  state => ({ card: state.card, cardAdded: state.card.cardAdded }),
   { addCard }
 )(Profile)

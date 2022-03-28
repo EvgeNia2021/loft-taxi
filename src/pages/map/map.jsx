@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import { HeaderWithLinks } from "../../components/header/header";
-import { OrderForm } from "./orderForm";
+import  OrderForm from "./orderForm";
 
 export class Map extends Component {
   map = null;

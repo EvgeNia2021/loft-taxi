@@ -1,15 +1,16 @@
-import { put, call} from "redux-saga/effects";
-import { addressList } from "./api.js";
-import {
-  FETCH_ADDRESS_LIST
-} from "./actions";
 
-function* addressListSaga() {
+import {  put, call, takeEvery } from "redux-saga/effects";
+import { addressList } from "../api";
+import {
+  fetchListRequest,
+  fetchListSuccess
+} from "../actions";
+export function* addressSaga() {
           const result = yield call(addressList);
-          yield put(FETCH_ADDRESS_LIST(result.addresses));
+          yield put(fetchListSuccess(result.addresses));
   
 }
 
 export function* addressListSaga() {
-  yield takeEvery(FETCH_ADDRESS_LIST, addressListSaga);
+  yield takeEvery(fetchListRequest, addressSaga);
 }

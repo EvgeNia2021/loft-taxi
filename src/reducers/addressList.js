@@ -1,15 +1,14 @@
-import { FETCH_ADDRESS_LIST } from "../actions"
+import { handleActions } from "redux-actions";
+import {
+  fetchListSuccess
+} from "../actions";
 
-const initialState = {
-  addressLIst: null
-}
+export const addressList = handleActions(
+  {
+      [fetchListSuccess]: (_state, action) => action.payload
+  },
+  []
+);
 
-export const addressReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_ADDRESS_LIST: {
-      return { ...action.payload }
-    }
-    default:
-      return state
-  }
-}
+
+
