@@ -5,7 +5,7 @@ import {
 
 export const addressList = handleActions(
   {
-      [fetchListSuccess]: (_state, action) => action.payload
+    [fetchListSuccess]: (_state, action) => action.payload
   },
   []
 );

@@ -8,15 +8,16 @@ import { useEffect } from "react";
 import { fetchListRequest } from "../../actions";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { addressList } from "../../reducers/addressList"
+import { addressList } from "../../reducers/addressList";
 import { getAddressList } from "./selectors";
 import { useSelector } from "react-redux";
 
 
 const OrderForm = React.memo(props => {
- 
   const { fetchListRequest, addressList } = props;
   
+  // const address = useSelector(state => state.addressList);
+  // const options = address.map(option => ({ value: option, label: option }));
   useEffect(() => {
     fetchListRequest();
   }, [])
@@ -30,7 +31,7 @@ const OrderForm = React.memo(props => {
               <span className="order__icon">
                 <Dot />
               </span>
-              <Select className="order__input" id="address1" name="address1" placeholder="Откуда" addressKey="from" />
+              <Select className="order__input" id="address1" name="from" placeholder="Откуда" addressKey="from"></Select>
               <div className="order__controls">
               
                 <button className="order__cross"><Cross /></button>
@@ -41,7 +42,8 @@ const OrderForm = React.memo(props => {
               <span className="order__icon">
                 <Arrow />
               </span>
-              <Select className="order__input" id="address2" name="address2" placeholder="Куда" addressKey="to"  />
+              <Select className="order__input" id="address2" name="address2" placeholder="Куда" addressKey="to" 
+             ></Select>
               <div className="order__controls">
                 <button className="order__cross"><Cross /></button>
                 <button className="order__tick"><Tick /></button>
@@ -85,7 +87,8 @@ const OrderForm = React.memo(props => {
 OrderForm.propTypes = {
   cardAdded: PropTypes.bool,
   addressList: PropTypes.array,
-  fetchListRequest: PropTypes.func
+  fetchListRequest: PropTypes.func,
+  addressKey: PropTypes.string
 }
 
 const mapStateToProps = state => ({

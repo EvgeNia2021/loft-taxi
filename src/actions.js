@@ -20,4 +20,3 @@ export const cardToStore = data => ({ type: CARD_TO_STORE, payload: data })
 
 export const fetchListRequest = createAction("FETCH_LIST_REQUEST");
 export const fetchListSuccess = createAction("FETCH_LIST_SUCCESS");
-export const fetchListFailure = createAction("FETCH_LIST_FAILURE");
