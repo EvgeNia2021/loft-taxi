@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { logOut } from "../../actions"
+import { logOut, removeFlag } from "../../actions"
 import { connect } from "react-redux"
 import { LinkNav } from "../themeConverter/themeConverter"
 import { AppBar, Toolbar, Container} from "@material-ui/core";
@@ -17,6 +17,11 @@ class Header extends Component {
     event.preventDefault();
     this.props.logOut();
   };
+
+  // removeFlag = (event) => {
+  //   event.preventDefault()
+  //   this.props.removeFlag()
+  // }
 
   render() {
     // const { navigateTo } = this.props
@@ -49,5 +54,5 @@ class Header extends Component {
 
 export const HeaderWithLinks = connect(
   null,
-  { logOut }
+  { logOut, removeFlag }
 )(Header);

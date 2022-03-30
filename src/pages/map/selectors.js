@@ -1,1 +1,1 @@
-export const getAddressList = state => state.addressList.addressList
+export const getAddressList = state => state.addressList

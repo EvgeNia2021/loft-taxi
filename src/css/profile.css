@@ -1,14 +1,74 @@
-.profile__form {
+.profile__wrapper {
   height: 100vh;
   background: url("../img/mapBackground.png") no-repeat 100% 100% / cover;
-  flex: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
+}
+
+.profile__form {
+
+  display: inline-flex;
+  justify-content: space-between;
+  margin-bottom: 41px;
+
 }
 
 .profile__paper {
   padding: 56px 73px;
-  width: 888px;
-  height: 588px;
+  width: 800px;
+  height: 500px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__right-paper {
+  width: 347px;
+  height: 182px;
+}
+
+.profile__left {
+ 
+}
+
+.profile__title {
+  margin-bottom: 13px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.profile__subtitle {
+  margin-bottom: 51px;
+  color: #7B7B7B;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.modal {
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 700px;
+}
+
+.fs {
+  font-size: 21px;
+}
+
+.profile__form-left {
+  width: 50%;
+  margin-bottom: 41px;
+}
+
+.profile__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order {
+  z-index:   100;
 }

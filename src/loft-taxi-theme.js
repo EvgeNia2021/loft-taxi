@@ -65,7 +65,7 @@ export const theme = createTheme({
       root: {
         textTransform: 'none',
         padding: "16px 141px",
-        borderRadius: 70
+        borderRadius: 70,
       },
       containedPrimary: {
         boxShadow: "none",
