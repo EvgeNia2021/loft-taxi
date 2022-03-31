@@ -134,6 +134,7 @@ const OrderForm = React.memo(props => {
       ) : (
         <Paper elevation={4} className="order">
         <div>Заказ размещен</div>
+        <Button variant="contained" color="primary" type="submit" className="f24">Сделать новый заказ</Button>
         </Paper>
       )}
     </>
