@@ -1,49 +1,53 @@
 import React, { Component } from "react";
-import { withAuth } from "../../authContext"
 import PropTypes from 'prop-types';
+import { connect } from "react-redux"
+import { authorize } from "../../actions";
+import { Navigate } from "react-router-dom";
+import { Button, Input, FormLabel, Paper } from "@material-ui/core";
+import Logo from "../../components/sideLogo/sideLogo"
+import { LinkNav } from "../../components/themeConverter/themeConverter"
+
 
 export class LoginPage extends Component {
   authorize = (event) => {
     event.preventDefault()
     const { email, password } = event.target;
-    this.props.logIn(email.value, password.value)
-  }
-  goToProfilePage = (event) => {
-    event.preventDefault();
-    this.props.navigate("profile")
-  }
-
-  goToRegPage = (event) => {
-    event.preventDefault();
-    this.props.navigate("registration")
+    this.props.authorize(email.value, password.value)
   }
 
   render() {
 
     return (
       <>
-        {this.props.isLoggedIn ? (
-          <p>Вы авторизированы <button onClick={this.goToProfilePage}>Перейти в профиль</button></p>
-        ) : (
-          <div>
-            <form onSubmit={this.authorize}>
-              <h1 className="login__title">Войти</h1>
-              <label htmlFor="email">Email:</label>
-              <input id="email" type="email" name="email" size="16" />
-              <label htmlFor="password">Пароль:</label>
-              <input id="password" type="password" name="password" size="16" />
+        {this.props.isLoggedIn ? <Navigate to='/map' /> : (
+          <div className="login__container">
+            <Logo />
+            <div className="login__form">
+            <Paper elevation={3} className="login__paper">
+            <form className="form__text" onSubmit={this.authorize}>
+              <h1 className="form__title">Войти</h1>
+              <div className="form__group">
+              <FormLabel className="form__label" htmlFor="email">Email</FormLabel>
+              <Input className="form__input" id="email" type="email" name="email" placeholder="mail@mail.ru" />
+              </div>
+              <div className="form__group">
+              <FormLabel className="form__label" htmlFor="password">Пароль</FormLabel>
+              <Input className="form__input" id="password" type="password" name="password" placeholder="*************" />
+              </div>
               <div className="login__forgot">
                 Забыли пароль?
               </div>
-              <button type="submit">
-
-                Войти
-              </button>
-              <div className="login__subtitle">
+              <Button
+                variant="contained" color="primary" to="/profile" type="submit">Войти</Button>
+            </form>
+            <div className="login__new">
+            <div className="subtitle">
                 Новый пользователь?
               </div>
-            </form>
-            <button onClick={this.goToRegPage}>Регистрация</button>
+            <LinkNav to="/registration">Регистрация</LinkNav>
+            </div>
+            </Paper>
+            </div>
           </div>
         )}
       </>
@@ -56,4 +60,7 @@ LoginPage.propTypes = {
   logIn: PropTypes.func,
   navigate: PropTypes.func,
 };
-export const LoginWithAuth = withAuth(LoginPage);
+export const LoginWithAuth = connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn }),
+  { authorize }
+)(LoginPage);
