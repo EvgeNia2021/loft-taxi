@@ -1,71 +1,70 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import { HeaderWithLinks } from "../../components/header/header";
-import  OrderForm from "./orderForm";
+import OrderForm from "./orderForm";
+// import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { drawRouteParams } from "./drawRouteParams"
+window.URL.createObjectURL = function () { };
 
-export class Map extends Component {
+class Map extends Component {
   map = null;
   mapContainer = React.createRef();
+
+ 
 
   componentDidMount() {
     mapboxgl.accessToken = "pk.eyJ1IjoiZXZnZW5pYTIwMjIiLCJhIjoiY2wwbWVxMWJtMDB3MTNpbXpxdzZxYnY4cyJ9.t1LPL9k1zEpfzpMYw8uyRg"
     this.map = new mapboxgl.Map({
-      container: this.mapContainer.current,
+      container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v9',
-      center: [12.33194, 45.43972],
+      center: [30.3056504, 59.9429126],
       zoom: 12,
     })
+
+  }
+  
+
+  componentDidUpdate() {
+    const coordinates = this.props.route;
+
+    if (coordinates) {
+      this.map.flyTo({
+        center: coordinates[0],
+        zoom: 15,
+      });
+
+      var mapRouteLayer = this.map.getLayer('route');
+
+      if (mapRouteLayer) {
+        this.map.removeLayer('route').removeSource('route');
+      }
+
+      this.map.addLayer(drawRouteParams(coordinates));
+    }
   }
 
   componentWillUnmount() {
     this.map.remove()
   }
 
-  writeRoute = () => {
-    const { route } = this.props;
-    if (route.length > 0) {
-      this.map.addLayer({
-        id: "route",
-        type: "line",
-        source: {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            properties: {},
-            geometry: {
-              type: "LineString",
-              coordinates: route
-            }
-          }
-        },
-        layout: {
-          "line-join": "round",
-          "line-cap": "round"
-        },
-        paint: {
-          "line-color": "#c2423a",
-          "line-width": 8
-        }
-      });
-      this.map.flyTo({
-        center: route[0],
-        zoom: 15
-      });
-    } else if (this.map.getLayer("route") !== undefined) {
-      this.map.removeLayer("route");
-      this.map.removeSource("route");
-    }
-  };
+
 
   render() {
-    return(
-    <>
-    <HeaderWithLinks unauthorize={this.props.unauthorize} removeFlag={this.props.removeFlag}/>
-    <OrderForm />
-    {/* <div className="map-wrapper"> */}
-      <div data-testid="map" className="map" ref={this.mapContainer} />
-    {/* </div> */}
-    </>
+    return (
+      <>
+        <HeaderWithLinks unauthorize={this.props.unauthorize} />
+        {!this.props.cardAdded ? (
+          <OrderForm />
+        ) : (<div></div>)}
+        <div data-testid="map" className="map" ref={(el) => (this.mapContainer = el)} />
+        
+      </>
     );
   }
+
 }
+
+export default connect(
+  (state) => ({ cardAdded: state.card.cardAdded, route: state.route }),
+)(Map)

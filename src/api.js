@@ -4,6 +4,7 @@ export const serverLogIn = data =>
     headers: {
       'Content-Type': 'application/json'
     },
+    // mode: 'no-cors',
     method: 'POST'
   }).then(res => res.json());
 
@@ -13,6 +14,7 @@ export const addCard = data =>
     headers: {
       "Content-Type": "application/json"
     },
+    // mode: 'no-cors',
     method: "POST"
   }).then(res => res.json());
 
@@ -21,9 +23,9 @@ export const addressList = () =>
     res.json()
   );
 
-export const route = (address1, address2) => {
-  return fetch(
-    `https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`
+export const getRoute = (payload) => 
+ fetch(
+    `https://loft-taxi.glitch.me/route?address1=${payload.address1}&address2=${payload.address2}`
   ).then(res => res.json());
-};
+
 

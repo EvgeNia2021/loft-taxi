@@ -1,17 +1,13 @@
-import { takeLatest, put, call, fork } from "redux-saga/effects";
-import { route } from "./api.js";
-import { fetchRouteRequest, fetchRouteSuccess } from "./actions";
+import { put, call, takeEvery } from "redux-saga/effects";
+import { getRoute } from "../api";
+import {  FETCH_ROUTE, setRoute } from "../actions";
 
-// function* routeWatcher() {
-//   yield takeLatest(fetchRouteRequest.toString(), routeFlow);
-// }
-
-export function* routeFlow(action) {
-    const [addressFrom, addressTo] = action.payload;
-    const payload = yield call(route, addressFrom, addressTo);
-    yield put(fetchRouteSuccess(payload));
+export function* routeSaga(action) {
+  const result = yield call(getRoute, action.payload);
+  yield put(setRoute(result));
+  console.log(result)
 }
 
-export default function*() {
-  yield fork(routeWatcher);
+export function* routesSaga() {
+  yield takeEvery(FETCH_ROUTE, routeSaga);
 }

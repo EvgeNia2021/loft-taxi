@@ -1,7 +1,7 @@
 import './css/App.css';
 import React from 'react';
 import { ProfileWithAuth } from "./pages/profile/profile";
-import { Map } from "./pages/map/map";
+import  Map from "./pages/map/map";
 import { LoginWithAuth } from "./pages/login/login";
 import { Registration } from "./pages/registration/registration";
 import PropTypes from 'prop-types';

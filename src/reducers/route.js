@@ -1,13 +1,17 @@
-import { handleActions } from "redux-actions";
 import {
-  fetchRouteSuccess, fetchRouteRequest, clearRoute
+  SET_ROUTE, DELETE_ROUTE
 } from "../actions";
 
-export const drawRoute = handleActions(
-  {
-    [fetchRouteRequest]: () => [],
-    [fetchRouteSuccess]: (_, action) => action.payload,
-    [clearRoute]: () => []
-  },
-  []
-);
+export default function (state = null, action) {
+  switch (action.type) {
+    case SET_ROUTE: {
+      return action.payload.route;
+    }
+    case DELETE_ROUTE: {
+      return null;
+    }
+    default:
+      return state;
+  }
+}
+
