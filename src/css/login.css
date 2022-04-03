@@ -45,6 +45,9 @@
 
 .form__label {
   margin-bottom: 10px;
+  font-size: 14;
+  color: #828282;
+  font-weight: 400;
 }
 
 .login__forgot {

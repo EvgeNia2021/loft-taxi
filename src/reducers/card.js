@@ -1,4 +1,4 @@
-import { CARD_TO_STORE, REMOVE_FLAG } from "../actions"
+import { CARD_TO_STORE, REMOVE_FLAG, ADD_CARD, loadProfile } from "../actions"
 
 const initialState = {
   cardNumber: null,
@@ -19,6 +19,11 @@ export const cardReducer = (state = initialState, action) => {
     case REMOVE_FLAG: {
       return { 
         cardAdded: false 
+      }
+    }
+
+    case loadProfile: {
+      return { ...action.payload
       }
     }
   

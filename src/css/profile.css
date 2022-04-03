@@ -30,9 +30,7 @@
   height: 182px;
 }
 
-.profile__left {
- 
-}
+
 
 .profile__title {
   margin-bottom: 13px;
@@ -60,7 +58,7 @@
 
 .profile__form-left {
   width: 50%;
-  margin-bottom: 41px;
+
 }
 
 .profile__container {
@@ -70,5 +68,23 @@
 }
 
 .order {
-  z-index:   100;
+  z-index: 100;
+}
+
+/* .form__input .profile__form-left {
+  margin-bottom: 26px;
+} */
+
+.profile__group {
+  margin-bottom: 26px;
+  margin-right: 35px;
+}
+
+.profile__group:last-child {
+  margin-bottom: 0;
+}
+
+.profile__group2 {
+  display: flex;
+  justify-content: space-between;
 }

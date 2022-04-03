@@ -3,58 +3,43 @@ import { HeaderWithLinks } from "../../components/header/header";
 import { connect, useDispatch } from "react-redux";
 import { Button, Input, FormLabel, Paper, makeStyles, } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { addCard, removeFlag } from "../../actions";
+import { addCard, cardToStore, loadProfile, removeFlag } from "../../actions";
 import PropTypes from 'prop-types';
+import { ProfileForm } from "./profileForm"
 
 
-export class Profile extends Component {
-
-  addCard = (event) => {
-    event.preventDefault()
-    const { cardName, cardNumber, expiryDate, cvc } = event.target;
-    this.props.addCard(cardName.value, cardNumber.value, expiryDate.value, cvc.value)
-
-  }
-
-  componentWillUnmount() {
-    this.props.removeFlag()
-  }
+const Profile = ({ token, addCard, navigate, unauthorize, cardAdded, removeFlag, card , loadProfile}) => {
+  useEffect(() => {
+      removeFlag();
+      loadProfile()
+}, [])
 
 
-  render() {
-    console.log(this.props.card)
+  
+
+  // addCard = (event) => {
+  //   event.preventDefault()
+  //   const { cardName, cardNumber, expiryDate, cvc } = event.target;
+  //   this.props.addCard(cardName.value, cardNumber.value, expiryDate.value, cvc.value, token)
+
+  // }
+
+  
+
+  // render() {
+    console.log(card)
 
 
     return (
       <>
-        {!this.props.cardAdded ? (
+        {!cardAdded ? (
           <div className="container">
-            <HeaderWithLinks navigate={this.props.navigate} unauthorize={this.props.unauthorize} />
+            <HeaderWithLinks navigate={navigate} unauthorize={unauthorize} />
             <div className="profile__wrapper">
               <Paper elevation={3} className="profile__paper">
                 <h1 className="profile__title">Профиль</h1>
                 <div className="profile__subtitle">Введите платежные данные</div>
-                <form onSubmit={this.addCard} className="profile__container">
-                  <div className="profile__form">
-                    <div className="profile__form-left">
-                      <FormLabel className="form__label" htmlFor="cardName">Имя владельца</FormLabel>
-                      <Input className="form__input" id="cardName" name="cardName" size="16" />
-                      <FormLabel className="form__label" htmlFor="cardNumber">Номер карты</FormLabel>
-                      <Input className="form__input" id="cardNumber" name="cardNumber" size="16" />
-                      <FormLabel className="form__label" htmlFor="expiryDate">MM/YY</FormLabel>
-                      <Input className="form__input" id="expiryDate" name="expiryDate" size="16" />
-                      <FormLabel className="form__label" htmlFor="cvc">CVC</FormLabel>
-                      <Input className="form__input" id="cvc" name="cvc" size="16" />
-                    </div>
-                    <div className="profile__form-right">
-                      <Paper elevation={3} className="profile__right-paper">
-                        <FormLabel className="form__label" htmlFor="cardNumber">Номер карты</FormLabel>
-                        <FormLabel className="form__label" htmlFor="expiryDate">MM/YY</FormLabel>
-                      </Paper>
-                    </div>
-                  </div>
-                  <Button variant="contained" color="primary" type="submit">Сохранить</Button>
-                </form>
+                <ProfileForm token={token} addCard={addCard} />
               </Paper>
             </div>
           </div>
@@ -75,14 +60,15 @@ export class Profile extends Component {
     );
   }
 
-}
+// }
+// Profile.propTypes = {
+//   addCard: PropTypes.func,
+//   cardAdded: PropTypes.bool,
+//   loadProfile: PropTypes.array,
+//   token: PropTypes.string,
+// };
 
-Profile.propTypes = {
-  addCard: PropTypes.func,
-  cardAdded: PropTypes.bool,
-};
-
-export const ProfileWithAuth = connect(
-  state => ({ card: state.card, cardAdded: state.card.cardAdded }),
-  { addCard, removeFlag }
+const mapStateToProps = (state) => ({ token: state.auth.token, card: state.card, cardAdded: state.card.cardAdded });
+export default connect(mapStateToProps,
+  { addCard, removeFlag, loadProfile }
 )(Profile)

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import { HeaderWithLinks } from "../../components/header/header";
 import OrderForm from "./orderForm";
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { drawRouteParams } from "./drawRouteParams"
 window.URL.createObjectURL = function () { };
@@ -45,7 +45,7 @@ class Map extends Component {
   }
 
   componentWillUnmount() {
-    this.map.remove()
+   this.map.remove()
   }
 
 
@@ -54,16 +54,21 @@ class Map extends Component {
     return (
       <>
         <HeaderWithLinks unauthorize={this.props.unauthorize} />
-        {!this.props.cardAdded ? (
+        <div data-testid="map" className="map" ref={(el) => (this.mapContainer = el)} />
+        {this.props.cardAdded ? (
           <OrderForm />
         ) : (<div></div>)}
-        <div data-testid="map" className="map" ref={(el) => (this.mapContainer = el)} />
+     
         
       </>
     );
   }
 
 }
+
+Map.propTypes = {
+  cardAdded: PropTypes.bool
+};
 
 export default connect(
   (state) => ({ cardAdded: state.card.cardAdded, route: state.route }),

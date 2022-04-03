@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { getAddressList } from "./selectors";
 import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 
 
@@ -19,13 +21,18 @@ const OrderForm = React.memo(props => {
   const [route, setRoute] = useState({ from: '', to: '' })
   const [showOrderForm, setShowOrderForm] = useState(true);
 
+  const { register, handleSubmit } = useForm()
+  const dispatch = useDispatch()
 
+  const onSubmit = (data) => {
+    const { from, to } = data
+    dispatch(fetchRoute(from, to))
+    setShowOrderForm(false);
+  }
 
   useEffect(() => {
     fetchListRequest();
   }, [])
-
-  const { from, to } = props;
 
   const handleChange = event => {
     const input = event.target
@@ -33,73 +40,67 @@ const OrderForm = React.memo(props => {
     setRoute({ ...route, [input.name]: input.value });
   }
 
+  const handleNewOrder = () => {
+    setShowOrderForm(true);
+  }
 
-
-  const drawRoute = event => {
-    event.preventDefault();
-
-    fetchRoute(route.from, route.to);
-    setShowOrderForm(false);
-  };
-
-
+  const clearInput = () => {
+    setRoute({});
+  }
 
   return (
     <>
       {showOrderForm ? (
         <Paper className="order">
-          <form onSubmit={drawRoute}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="order__top">
               <div className="order__wrapper">
                 <span className="order__icon">
                   <Dot />
                 </span>
-                <FormControl className='formControl'>
+                <FormControl className='form__control'>
                   <InputLabel htmlFor="from">Откуда</InputLabel>
                   <Select className="order__input" id="address1" placeholder="Откуда"
                     value={route.from || ""}
-                    name={from}
-                    inputProps={{ name: 'from', id: 'from' }}
                     IconComponent={Tick}
                     autoWidth
-
+                    {...register('from')}
                     onChange={handleChange}
                   >{
                       addressList && addressList.filter(item => item !== route.to).map(item => (
                         <MenuItem key={item} value={item}>{item}</MenuItem>
                       ))
-                    }</Select>
+                    }
+                  </Select>
+                  <button className="order__cross" onClick={clearInput} type="reset" ><Cross /></button>
                 </FormControl>
-                <div className="order__controls">
+                {/* <div className="order__controls">
 
-                  <button className="order__cross"><Cross /></button>
-                  <button className="order__tick"><Tick /></button>
-                </div>
+                 
+                </div> */}
               </div>
               <div className="order__wrapper">
                 <span className="order__icon">
                   <Arrow />
                 </span>
-                <FormControl className='formControl'>
+                <FormControl className="form__control">
                   <InputLabel htmlFor="to">Куда</InputLabel>
                   <Select className="order__input" id="address2" placeholder="Куда"
                     value={route.to || ""}
-                    name={to}
-                    inputProps={{ name: 'to', id: 'to' }}
                     IconComponent={Tick}
                     autoWidth
-
+                    {...register('to')}
                     onChange={handleChange}
                   >{
                       addressList && addressList.filter(item => item !== route.from).map(item => (
                         <MenuItem key={item} value={item}>{item}</MenuItem>
                       ))
                     }</Select>
+                  <button className="order__cross" type="reset" onClick={clearInput}><Cross /></button>
                 </FormControl>
-                <div className="order__controls">
-                  <button className="order__cross"><Cross /></button>
-                  <button className="order__tick"><Tick /></button>
-                </div>
+                {/* <div className="order__controls">
+                  
+                </div> */}
               </div>
 
             </div>
@@ -127,14 +128,18 @@ const OrderForm = React.memo(props => {
                     <div className="order__car3"></div>
                   </Paper></button>
               </div>
-              <Button variant="contained" color="primary" type="submit" className="f24">Заказать</Button>
+              <Button variant="contained" color="primary" type="submit" className="f24" disabled={!route.from || !route.to} >Заказать</Button>
             </Paper>
           </form>
         </Paper>
       ) : (
-        <Paper elevation={4} className="order">
-        <div>Заказ размещен</div>
-        <Button variant="contained" color="primary" type="submit" className="f24">Сделать новый заказ</Button>
+        <Paper elevation={4} className="order__placed">
+          <div className="order__text">
+            <div className="order__title">Заказ размещен</div>
+            <div className="order__subtitle">Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.</div>
+          </div>
+          <Button variant="contained" color="primary" onClick={handleNewOrder} className="f24">Сделать новый заказ</Button>
+
         </Paper>
       )}
     </>

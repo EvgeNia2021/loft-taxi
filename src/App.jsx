@@ -1,9 +1,9 @@
 import './css/App.css';
 import React from 'react';
-import { ProfileWithAuth } from "./pages/profile/profile";
+import  Profile  from "./pages/profile/profile";
 import  Map from "./pages/map/map";
-import { LoginWithAuth } from "./pages/login/login";
-import { Registration } from "./pages/registration/registration";
+import { LoginWithAuth } from "./pages/login";
+import  Registration  from "./pages/registration/registration";
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -26,7 +26,7 @@ class App extends React.Component {
             <Route exact path="/" element={<LoginWithAuth />} />
             <Route exact path="/registration" element={<Registration />} />
             <Route path='/map' element={<ProtectedPage component={<Map />} />} />
-            <Route path='/profile' element={<ProtectedPage component={<ProfileWithAuth />} />} />
+            <Route path='/profile' element={<ProtectedPage component={<Profile />} />} />
           </Routes>
         </section>
       </>

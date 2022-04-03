@@ -5,8 +5,7 @@ import { ADD_CARD, cardToStore } from "../actions";
 
 
 function* cardSaga(action) {
-
-  const result = yield call(addCard, { ...action.payload });
+  const result = yield call(addCard, { ...action.payload});
   if (result.success) {
     yield put(cardToStore(action.payload))
 
