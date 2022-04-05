@@ -26,8 +26,7 @@
 }
 
 .profile__right-paper {
-  width: 347px;
-  height: 182px;
+  
 }
 
 
@@ -88,3 +87,37 @@
   display: flex;
   justify-content: space-between;
 }
+
+.display__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 27px;
+  align-items: center;
+}
+
+.display__expiry {
+  font-size: 12px;
+}
+
+.display__number {
+  font-size: 21px;
+  margin-bottom: 35px;
+}
+.display__master {
+  display: flex;
+  align-items: center;
+}
+
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-circle {
+  margin-right: -10px;
+  opacity: 50%;
+    }
+.right-circle {
+    
+      opacity: 50%;
+    }

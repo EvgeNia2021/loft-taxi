@@ -6,7 +6,7 @@ export function* authorizeSaga(action) {
   const  data  = action.payload;
   const result = yield call(serverLogIn, data)
   if(result.success) {
-    yield put(logIn())
+    yield put(logIn(result.token))
   }
 }
 

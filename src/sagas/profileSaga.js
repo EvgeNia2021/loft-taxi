@@ -1,8 +1,14 @@
-import { takeEvery, call, put, select, take } from "redux-saga/effects"
-import { addCard } from '../api'
-import { ADD_CARD, cardToStore } from "../actions";
+import { takeEvery, call, put } from "redux-saga/effects"
+import { addCard, loadCardData } from '../api'
+import { ADD_CARD, cardToStore, getCardSuccess, GET_CARD_REQUEST } from "../actions";
 
+function* getCardSaga(action) {
+  const response = yield call(loadCardData, action.payload);
+  if (response) {
+    yield put(getCardSuccess(response))
 
+  }
+}
 
 function* cardSaga(action) {
   const result = yield call(addCard, { ...action.payload});
@@ -12,6 +18,8 @@ function* cardSaga(action) {
   }
 }
 export function* profileSaga() {
+  yield takeEvery(GET_CARD_REQUEST, getCardSaga);
   yield takeEvery(ADD_CARD, cardSaga);
+ 
 }
 

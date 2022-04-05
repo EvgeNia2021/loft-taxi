@@ -12,16 +12,67 @@ import { getAddressList } from "./selectors";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/core"
+import { theme } from "../../loft-taxi-theme";
 
+const useStyles = makeStyles({
+  select: {
+    height: 60,
+    display: "inline-flex",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingRight: 5,
 
+  },
+  cross: {
+    position: "absolute",
+    top: 39,
+    right: 20,
+    borderRight: "1px solid #E0E0E0",
+    marginRight: 11,
+    paddingRight: 11,
+    alignSelf: "flex-end",
+    zIndex: 10,
+  },
+  control: {
+    display: "flex",
+  justifyContent: "space-between",
+  width: "100%",
+  },
+  label: {
+    marginTop: 8,
+  },
+  car: {
+    padding: 11,
+    width: 106,
+    height: 167,
+    display: "flex",
+    flexDirection: "column",
+    cursor: "pointer",
+    transition: `${theme.transitions.duration.standard}ms`,
+    opacity: 0.5,
+    "&:hover": {
+      boxShadow: theme.shadows[5],
+      opacity: 1,
+    }
+  }
+,
+cardActive: {
+  boxShadow: theme.shadows[6],
+  opacity: 1
+}
+});
 
 const OrderForm = React.memo(props => {
-  const { fetchListRequest, fetchRoute } = props;
+
+  const classes = useStyles();
+  // const { fetchListRequest, fetchRoute } = props;
   const addressList = useSelector(getAddressList)
   const [route, setRoute] = useState({ from: '', to: '' })
   const [showOrderForm, setShowOrderForm] = useState(true);
+  const [activeRate, setActiveRate ] = useState("standart")
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset  } = useForm()
   const dispatch = useDispatch()
 
   const onSubmit = (data) => {
@@ -31,7 +82,7 @@ const OrderForm = React.memo(props => {
   }
 
   useEffect(() => {
-    fetchListRequest();
+    dispatch(fetchListRequest());
   }, [])
 
   const handleChange = event => {
@@ -40,14 +91,26 @@ const OrderForm = React.memo(props => {
     setRoute({ ...route, [input.name]: input.value });
   }
 
+
   const handleNewOrder = () => {
     setShowOrderForm(true);
-  }
-
-  const clearInput = () => {
+    props.resetRoute()
     setRoute({});
   }
 
+
+
+  const clearInputFrom = () => {
+  setRoute({ ...route, from: '' });
+  }
+
+  const clearInputTo = () => {
+    setRoute({ ...route, to: '' });
+    }
+
+
+ const setRate = (rate) => () => setActiveRate(rate)
+  
   return (
     <>
       {showOrderForm ? (
@@ -58,9 +121,9 @@ const OrderForm = React.memo(props => {
                 <span className="order__icon">
                   <Dot />
                 </span>
-                <FormControl className='form__control'>
-                  <InputLabel htmlFor="from">Откуда</InputLabel>
-                  <Select className="order__input" id="address1" placeholder="Откуда"
+                <FormControl className={classes.control}>
+                  <InputLabel htmlFor="from" className={classes.label}>Откуда</InputLabel>
+                  <Select className={classes.select} id="address1" placeholder="Откуда"
                     value={route.from || ""}
                     IconComponent={Tick}
                     autoWidth
@@ -72,7 +135,7 @@ const OrderForm = React.memo(props => {
                       ))
                     }
                   </Select>
-                  <button className="order__cross" onClick={clearInput} type="reset" ><Cross /></button>
+                  <button className={classes.cross} onClick={clearInputFrom} type="reset"><Cross /></button>
                 </FormControl>
                 {/* <div className="order__controls">
 
@@ -83,9 +146,9 @@ const OrderForm = React.memo(props => {
                 <span className="order__icon">
                   <Arrow />
                 </span>
-                <FormControl className="form__control">
-                  <InputLabel htmlFor="to">Куда</InputLabel>
-                  <Select className="order__input" id="address2" placeholder="Куда"
+                <FormControl className={classes.control}>
+                  <InputLabel htmlFor="to" className={classes.label}>Куда</InputLabel>
+                  <Select className={classes.select} id="address2" placeholder="Куда"
                     value={route.to || ""}
                     IconComponent={Tick}
                     autoWidth
@@ -96,38 +159,44 @@ const OrderForm = React.memo(props => {
                         <MenuItem key={item} value={item}>{item}</MenuItem>
                       ))
                     }</Select>
-                  <button className="order__cross" type="reset" onClick={clearInput}><Cross /></button>
+                  <button className={classes.cross} onClick={clearInputTo}  type="reset" ><Cross /></button>
                 </FormControl>
-                {/* <div className="order__controls">
-                  
-                </div> */}
               </div>
 
             </div>
             <Paper elevation={4} className="order__bottom">
-              <div className="order__choice">
-                <button>
-                  <Paper elevation={5} className="order__option">
+              <ul className="order__choice">
+               <li className="order__option">
+                  <Paper elevation={5} className={`${classes.car} ${activeRate == 'standart' && classes.cardActive}`} 
+                  onClick={setRate("standart")}
+                  >
                     <div className="order__name">Стандарт</div>
                     <p className="order__cost">Стоимость</p>
                     <div className="order__price">150 ₽</div>
                     <div className="order__car"></div>
-                  </Paper></button>
-                <button>
-                  <Paper elevation={5} className="order__option">
+                  </Paper>
+                  </li>
+                  <li className="order__option">
+                  <Paper elevation={5} className={`${classes.car} ${activeRate == 'premium' && classes.cardActive}`}
+                  onClick={setRate("premium")}
+                  >
                     <div className="order__name">Премиум</div>
                     <p className="order__cost">Стоимость</p>
                     <div className="order__price">250 ₽</div>
                     <div className="order__car2"></div>
-                  </Paper></button>
-                <button>
-                  <Paper elevation={5} className="order__option">
+                  </Paper>
+                  </li>
+                  <li className="order__option">
+                  <Paper elevation={5} className={`${classes.car} ${activeRate == 'business' && classes.cardActive}`}
+                  onClick={setRate("business")}
+                  >
                     <div className="order__name">Бизнес</div>
                     <p className="order__cost">Стоимость</p>
                     <div className="order__price">300 ₽</div>
                     <div className="order__car3"></div>
-                  </Paper></button>
-              </div>
+                  </Paper>
+                  </li>
+              </ul>
               <Button variant="contained" color="primary" type="submit" className="f24" disabled={!route.from || !route.to} >Заказать</Button>
             </Paper>
           </form>
@@ -155,13 +224,5 @@ OrderForm.propTypes = {
   fetchRoute: PropTypes.func,
 }
 
-const mapStateToProps = state => ({
-  addressList: getAddressList(state),
-  route: state.route,
-});
 
-const mapDispatchToProps = {
-  fetchListRequest, fetchRoute
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderForm)
+export default OrderForm

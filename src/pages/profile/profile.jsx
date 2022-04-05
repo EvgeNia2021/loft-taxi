@@ -3,15 +3,14 @@ import { HeaderWithLinks } from "../../components/header/header";
 import { connect, useDispatch } from "react-redux";
 import { Button, Input, FormLabel, Paper, makeStyles, } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { addCard, cardToStore, loadProfile, removeFlag } from "../../actions";
+import { addCard, removeFlag } from "../../actions";
 import PropTypes from 'prop-types';
 import { ProfileForm } from "./profileForm"
 
 
-const Profile = ({ token, addCard, navigate, unauthorize, cardAdded, removeFlag, card , loadProfile}) => {
+const Profile = ({ cardAdded, addCard, navigate, unauthorize, removeFlag, card}) => {
   useEffect(() => {
       removeFlag();
-      loadProfile()
 }, [])
 
 
@@ -39,7 +38,7 @@ const Profile = ({ token, addCard, navigate, unauthorize, cardAdded, removeFlag,
               <Paper elevation={3} className="profile__paper">
                 <h1 className="profile__title">Профиль</h1>
                 <div className="profile__subtitle">Введите платежные данные</div>
-                <ProfileForm token={token} addCard={addCard} />
+                <ProfileForm  addCard={addCard} />
               </Paper>
             </div>
           </div>
@@ -70,5 +69,5 @@ const Profile = ({ token, addCard, navigate, unauthorize, cardAdded, removeFlag,
 
 const mapStateToProps = (state) => ({ token: state.auth.token, card: state.card, cardAdded: state.card.cardAdded });
 export default connect(mapStateToProps,
-  { addCard, removeFlag, loadProfile }
+  { addCard, removeFlag }
 )(Profile)

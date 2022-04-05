@@ -38,8 +38,8 @@ export const theme = createTheme({
     },
     MuiAppBar: {
       root: {
-      height: 102,
-    }
+        height: 102,
+      }
     },
 
     MuiInput: {
@@ -58,7 +58,7 @@ export const theme = createTheme({
     },
     MuiPaper: {
       root: {
-       
+
       }
     },
     MuiButton: {
@@ -66,6 +66,7 @@ export const theme = createTheme({
         textTransform: 'none',
         padding: "16px 141px",
         borderRadius: 70,
+        fontSize: 20,
       },
       containedPrimary: {
         boxShadow: "none",

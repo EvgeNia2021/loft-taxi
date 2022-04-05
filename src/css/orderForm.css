@@ -18,12 +18,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 46px 32px;
+  padding: 32px 32px;
 }
 
 .order__choice {
   display: flex;
   margin-bottom: 30px;
+  justify-content: center;
+  padding: 0 25px;
 }
 
 .order__option:last-child {
@@ -31,15 +33,13 @@
 }
 
 .order__option {
-  padding: 11px;
-  margin-right: 20px;
-  width: 106px;
-  height: 167px;
+ margin-right:  20px;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  
 }
+
 
 .order__name {
   font-size: 16px;
@@ -56,7 +56,7 @@
 .order__price {
   font-size: 24px;
   font-weight: 400;
-  margin-bottom: 13px;
+  margin-bottom: 4px;
 }
 
 .f24 {
@@ -82,7 +82,7 @@
   width: 100px;
   height: 64px;
   align-self: center;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 .order__wrapper {
@@ -113,10 +113,7 @@
 }
 
 .order__cross {
-  border-right: 1px solid #E0E0E0;
-  margin-right: 11px;
-  padding-right: 11px;
-  align-self: flex-end;
+  
 }
 
 
@@ -125,12 +122,17 @@
 }
 
 .form__control {
-  display: flex;
-  justify-content: space-between;
+  
 }
 
 .order__title {
 font-size: 36px;
+font-weight: 700;
+margin-bottom: 14px;
+}
+
+.order__fill-title {
+  font-size: 24px;
 font-weight: 700;
 margin-bottom: 14px;
 }
@@ -157,4 +159,11 @@ margin-bottom: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.order__fill-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }

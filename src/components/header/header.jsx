@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { LinkNav } from "../themeConverter/themeConverter"
 import { AppBar, Toolbar, Container} from "@material-ui/core";
 import HorizontalLogo from "../../components/horizontalLogo/horizontalLogo"
+import { Link } from "react-router-dom";
 // import { withStyles } from "@material-ui/core";
 
 // const styles = theme => ({
@@ -29,7 +30,7 @@ class Header extends Component {
       <>
         <div className="header">
           <div className="header__topline">
-              <HorizontalLogo />
+              <Link to="/map"><HorizontalLogo /></Link>
               <div>
                 <nav>
                   <ul  className="header__links">

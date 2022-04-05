@@ -18,10 +18,10 @@ export const addCard = data =>
     method: "POST"
   }).then(res => res.json());
 
-  // export const loadCardData = token =>
-  // fetch('https://loft-taxi.glitch.me/card?token=' + token).then(res =>
-  //   res.json()
-  // );
+  export const loadCardData = token =>
+  fetch(`https://loft-taxi.glitch.me/card?token=${token}`).then(res =>
+    res.json()
+  );
 
 export const addressList = () =>
   fetch("https://loft-taxi.glitch.me/addressList").then(res =>
