@@ -6,7 +6,6 @@ import Cross from "../../components/svg/cross";
 import Tick from "../../components/svg/tick";
 import { useEffect } from "react";
 import { fetchListRequest, fetchRoute } from "../../actions";
-import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { getAddressList } from "./selectors";
 import { useSelector } from "react-redux";
@@ -36,8 +35,8 @@ const useStyles = makeStyles({
   },
   control: {
     display: "flex",
-  justifyContent: "space-between",
-  width: "100%",
+    justifyContent: "space-between",
+    width: "100%",
   },
   label: {
     marginTop: 8,
@@ -56,23 +55,25 @@ const useStyles = makeStyles({
       opacity: 1,
     }
   }
-,
-cardActive: {
-  boxShadow: theme.shadows[6],
-  opacity: 1
-}
+  ,
+  cardActive: {
+    boxShadow: theme.shadows[6],
+    opacity: 1
+  },
+  newButton: {
+    fontSize: 18,
+  }
 });
 
 const OrderForm = React.memo(props => {
 
   const classes = useStyles();
-  // const { fetchListRequest, fetchRoute } = props;
   const addressList = useSelector(getAddressList)
   const [route, setRoute] = useState({ from: '', to: '' })
   const [showOrderForm, setShowOrderForm] = useState(true);
-  const [activeRate, setActiveRate ] = useState("standart")
+  const [activeRate, setActiveRate] = useState("standart")
 
-  const { register, handleSubmit, reset  } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const dispatch = useDispatch()
 
   const onSubmit = (data) => {
@@ -101,16 +102,16 @@ const OrderForm = React.memo(props => {
 
 
   const clearInputFrom = () => {
-  setRoute({ ...route, from: '' });
+    setRoute({ ...route, from: '' });
   }
 
   const clearInputTo = () => {
     setRoute({ ...route, to: '' });
-    }
+  }
 
 
- const setRate = (rate) => () => setActiveRate(rate)
-  
+  const setRate = (rate) => () => setActiveRate(rate)
+
   return (
     <>
       {showOrderForm ? (
@@ -137,10 +138,6 @@ const OrderForm = React.memo(props => {
                   </Select>
                   <button className={classes.cross} onClick={clearInputFrom} type="reset"><Cross /></button>
                 </FormControl>
-                {/* <div className="order__controls">
-
-                 
-                </div> */}
               </div>
               <div className="order__wrapper">
                 <span className="order__icon">
@@ -159,43 +156,43 @@ const OrderForm = React.memo(props => {
                         <MenuItem key={item} value={item}>{item}</MenuItem>
                       ))
                     }</Select>
-                  <button className={classes.cross} onClick={clearInputTo}  type="reset" ><Cross /></button>
+                  <button className={classes.cross} onClick={clearInputTo} type="reset" ><Cross /></button>
                 </FormControl>
               </div>
 
             </div>
             <Paper elevation={4} className="order__bottom">
               <ul className="order__choice">
-               <li className="order__option">
-                  <Paper elevation={5} className={`${classes.car} ${activeRate == 'standart' && classes.cardActive}`} 
-                  onClick={setRate("standart")}
+                <li className="order__option">
+                  <Paper elevation={5} className={`${classes.car} ${activeRate == 'standart' && classes.cardActive}`}
+                    onClick={setRate("standart")}
                   >
                     <div className="order__name">Стандарт</div>
                     <p className="order__cost">Стоимость</p>
                     <div className="order__price">150 ₽</div>
                     <div className="order__car"></div>
                   </Paper>
-                  </li>
-                  <li className="order__option">
+                </li>
+                <li className="order__option">
                   <Paper elevation={5} className={`${classes.car} ${activeRate == 'premium' && classes.cardActive}`}
-                  onClick={setRate("premium")}
+                    onClick={setRate("premium")}
                   >
                     <div className="order__name">Премиум</div>
                     <p className="order__cost">Стоимость</p>
                     <div className="order__price">250 ₽</div>
                     <div className="order__car2"></div>
                   </Paper>
-                  </li>
-                  <li className="order__option">
+                </li>
+                <li className="order__option">
                   <Paper elevation={5} className={`${classes.car} ${activeRate == 'business' && classes.cardActive}`}
-                  onClick={setRate("business")}
+                    onClick={setRate("business")}
                   >
                     <div className="order__name">Бизнес</div>
                     <p className="order__cost">Стоимость</p>
                     <div className="order__price">300 ₽</div>
                     <div className="order__car3"></div>
                   </Paper>
-                  </li>
+                </li>
               </ul>
               <Button variant="contained" color="primary" type="submit" className="f24" disabled={!route.from || !route.to} >Заказать</Button>
             </Paper>
@@ -207,7 +204,7 @@ const OrderForm = React.memo(props => {
             <div className="order__title">Заказ размещен</div>
             <div className="order__subtitle">Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.</div>
           </div>
-          <Button variant="contained" color="primary" onClick={handleNewOrder} className="f24">Сделать новый заказ</Button>
+          <Button variant="contained" color="primary" onClick={handleNewOrder} className={classes.newButton} >Сделать новый заказ</Button>
 
         </Paper>
       )}

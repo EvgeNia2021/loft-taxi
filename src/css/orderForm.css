@@ -59,10 +59,6 @@
   margin-bottom: 4px;
 }
 
-.f24 {
-  font-size: 24px;
-}
-
 .order__car {
   background-image: url("../img/car1.png");
   width: 95px;
@@ -112,18 +108,13 @@
   align-items: center;
 }
 
-.order__cross {
-  
-}
 
 
 .order__tick {
   margin-bottom: 3px;
 }
 
-.form__control {
-  
-}
+
 
 .order__title {
 font-size: 36px;

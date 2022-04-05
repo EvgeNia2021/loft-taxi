@@ -5,5 +5,5 @@ import { addressList } from "./addressList";
 import route from "./route";
 import register from "./register";
 
-export default combineReducers({ auth, card: cardReducer, addressList: addressList, route, register  })
+export default combineReducers({ auth, card: cardReducer, addressList: addressList, route, register })
 

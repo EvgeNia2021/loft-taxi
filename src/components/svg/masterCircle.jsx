@@ -1,5 +1,5 @@
 import React from "react";
-import circle from "../../src/img/circle.svg";
+import circle from "../../img/circle.svg";
 
 const MasterCircle = () => {
     return (

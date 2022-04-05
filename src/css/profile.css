@@ -25,11 +25,6 @@
   flex-direction: column;
 }
 
-.profile__right-paper {
-  
-}
-
-
 
 .profile__title {
   margin-bottom: 13px;
@@ -51,9 +46,6 @@
   width: 700px;
 }
 
-.fs {
-  font-size: 21px;
-}
 
 .profile__form-left {
   width: 50%;
@@ -69,10 +61,6 @@
 .order {
   z-index: 100;
 }
-
-/* .form__input .profile__form-left {
-  margin-bottom: 26px;
-} */
 
 .profile__group {
   margin-bottom: 26px;

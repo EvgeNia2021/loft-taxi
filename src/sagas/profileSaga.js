@@ -11,7 +11,7 @@ function* getCardSaga(action) {
 }
 
 function* cardSaga(action) {
-  const result = yield call(addCard, { ...action.payload});
+  const result = yield call(addCard, { ...action.payload });
   if (result.success) {
     yield put(cardToStore(action.payload))
 
@@ -20,6 +20,6 @@ function* cardSaga(action) {
 export function* profileSaga() {
   yield takeEvery(GET_CARD_REQUEST, getCardSaga);
   yield takeEvery(ADD_CARD, cardSaga);
- 
+
 }
 

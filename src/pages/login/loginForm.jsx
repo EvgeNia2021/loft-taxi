@@ -5,7 +5,7 @@ import { authorize } from "../../actions";
 import { useDispatch } from "react-redux";
 
 
-export const LoginForm = ({useDispatchHook = useDispatch}) => {
+export const LoginForm = ({ useDispatchHook = useDispatch }) => {
 
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatchHook()
@@ -15,7 +15,7 @@ export const LoginForm = ({useDispatchHook = useDispatch}) => {
   }
 
   return (
-    <form className="form__text" onSubmit={handleSubmit(onSubmit) }>
+    <form className="form__text" onSubmit={handleSubmit(onSubmit)}>
       <h1 className="form__title">Войти</h1>
       <div className="form__group">
         <FormLabel className="form__label" htmlFor="email">Email</FormLabel>
@@ -23,7 +23,7 @@ export const LoginForm = ({useDispatchHook = useDispatch}) => {
       </div>
       <div className="form__group">
         <FormLabel className="form__label" htmlFor="password">Пароль</FormLabel>
-        <Input {...register('password')}  className="form__input" id="password" type="password" name="password" placeholder="*************" />
+        <Input {...register('password')} className="form__input" id="password" type="password" name="password" placeholder="*************" />
       </div>
       <div className="login__forgot">
         Забыли пароль?
@@ -33,9 +33,3 @@ export const LoginForm = ({useDispatchHook = useDispatch}) => {
     </form>
   )
 }
-// authorize = (event) => {
-//   event.preventDefault()
-//   const { email, password } = event.target;
-//   this.props.authorize(email.value, password.value)
-// }
-

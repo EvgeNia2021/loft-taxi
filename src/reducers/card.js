@@ -11,23 +11,25 @@ const initialState = {
 export const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case CARD_TO_STORE: {
-      return { ...action.payload,
-        cardAdded: true 
+      return {
+        ...action.payload,
+        cardAdded: true
       }
     }
-  
+
     case REMOVE_FLAG: {
-      return { 
-        cardAdded: false 
+      return {
+        cardAdded: false
       }
     }
 
     case GET_CARD_SUCCESS: {
-      return { ...state,
+      return {
+        ...state,
         ...action.payload
       }
     }
-  
+
     default:
       return state
   }

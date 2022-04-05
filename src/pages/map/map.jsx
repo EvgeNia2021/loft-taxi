@@ -8,7 +8,6 @@ import { drawRouteParams } from "./drawRouteParams"
 import { getCardRequest } from "../../actions";
 import { Button, Paper } from "@material-ui/core";
 import { Link } from "react-router-dom";
-window.URL.createObjectURL = function () { };
 
 class Map extends Component {
   map = null;
@@ -38,21 +37,6 @@ class Map extends Component {
       this.drawPath(coordinates)
     }
   }
-  //   if (coordinates) {
-  //     this.map.flyTo({
-  //       center: coordinates[0],
-  //       zoom: 15,
-  //     });
-
-  //     var mapRouteLayer = this.map.getLayer('route');
-
-  //     if (mapRouteLayer) {
-  //       this.map.removeLayer('route').removeSource('route');
-  //     }
-
-  //     this.map.addLayer(drawRouteParams(coordinates));
-  //   }
-  // }
 
   resetRoute = () => {
     if (this.map && this.map.getLayer('route')) {

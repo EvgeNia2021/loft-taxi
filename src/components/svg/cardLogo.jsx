@@ -1,5 +1,5 @@
 import React from "react";
-import cardLogoSvg from "../../src/img/cardLogo.svg";
+import cardLogoSvg from "../../img/cardLogo.svg";
 
 const CardLogo = () => {
     return (

@@ -26,12 +26,12 @@ export const addCard = (cardName, cardNumber, expiryDate, cvc, token) => ({
   type: ADD_CARD, payload: { cardName, cardNumber, expiryDate, cvc, token },
 })
 export const cardToStore = data => ({ type: CARD_TO_STORE, payload: data })
-export const getCardRequest = token => ({ type: GET_CARD_REQUEST, payload: token})
-export const getCardSuccess = (data) => ({ type: GET_CARD_SUCCESS, payload: data})
+export const getCardRequest = token => ({ type: GET_CARD_REQUEST, payload: token })
+export const getCardSuccess = (data) => ({ type: GET_CARD_SUCCESS, payload: data })
 
 export const removeFlag = () => ({ type: REMOVE_FLAG })
 export const fetchRoute = (address1, address2) => ({ type: FETCH_ROUTE, payload: { address1, address2 } });
-export const setRoute = (route) => ({ type: SET_ROUTE, payload:  route  });
+export const setRoute = (route) => ({ type: SET_ROUTE, payload: route });
 
 
 

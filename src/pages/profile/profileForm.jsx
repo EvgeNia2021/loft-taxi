@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { addCard } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core"
-import CardLogo from "../../components/cardLogo"
-import CardIcon from "../../components/cardIcon"
-import MasterCircle from "../../components/masterCircle";
+import CardLogo from "../../components/svg/cardLogo"
+import CardIcon from "../../components/svg/cardIcon"
+import MasterCircle from "../../components/svg/masterCircle";
 
 const useStyles = makeStyles({
   input: {
@@ -26,13 +26,13 @@ const useStyles = makeStyles({
   },
   display: {
     width: 337,
-  height: 172,
-  padding: "18px 16px 16px 28px",
+    height: 172,
+    padding: "18px 16px 16px 28px",
   },
   leftCircle: {
-position: "relative",
-marginRight: "-10px",
-opacity: "80%",
+    position: "relative",
+    marginRight: "-10px",
+    opacity: "80%",
   },
   rightCircle: {
     position: "absolute",
@@ -77,7 +77,6 @@ export const ProfileForm = ({ useDispatchHook = useDispatch }) => {
         </div>
         <div className="profile__form-right">
           <Paper elevation={3} className={classes.display}>
-            {/* <div ref={this.myRef}></div> */}
             <div className="display__card">
               <div className="display__header">
                 <CardLogo />
@@ -85,15 +84,15 @@ export const ProfileForm = ({ useDispatchHook = useDispatch }) => {
               </div>
               <div className="display__number">{cardNumber}</div>
               <div className="card__footer">
-              <CardIcon />
+                <CardIcon />
                 <div className="display__master">
                   <div className="left-circle">
-                  <MasterCircle  /></div>
+                    <MasterCircle /></div>
                   <div className="right-circle" >
-                  <MasterCircle /></div>
+                    <MasterCircle /></div>
                 </div>
               </div>
-              </div>
+            </div>
           </Paper>
         </div>
       </div>

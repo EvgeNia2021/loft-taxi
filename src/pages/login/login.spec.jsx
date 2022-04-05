@@ -1,21 +1,27 @@
-// import React from "react";
-// import { LoginPage } from "./login";
-// import { render } from "@testing-library/react";
-// import { ProfileWithAuth } from "../profile/profile";
+import React from "react";
+import { LoginPage } from "./login";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { MemoryRouter as Router } from "react-router-dom";
 
-// describe("Home", () => {
-//   describe("when logged out", () => {
-//     it("renders form", () => {
-//       const { getByLabelText } = render(<LoginPage />);
-//       expect(getByLabelText("Email:")).toHaveAttribute("name", "email");
-//       expect(getByLabelText("Пароль:")).toHaveAttribute("name", "password");
-//     });
-
-//   })
-//   describe("when logged in", () => {
-//     it("renders profile page", () => {
-//       const { container } = render(<ProfileWithAuth />);
-//     expect(container.innerHTML).toMatch("Профиль")
-//     });
-//   });
-// });
+jest.mock("./loginForm", () => ({ LoginForm: () => <>Login form</> }));
+describe("Login", () => {
+  describe("when logged out", () => {
+    it("renders login form", () => {
+      const { container } = render(
+        <Provider
+          store={{
+            dispatch: () => { },
+            subscribe: () => { },
+            getState: () => ({ auth: { isLoggedIn: false } }),
+          }}
+        >
+          <Router location={{}}>
+            <LoginPage />
+          </Router>
+        </Provider>
+      );
+      expect(container.innerHTML).toMatch("Login form");
+    });
+  })
+});
