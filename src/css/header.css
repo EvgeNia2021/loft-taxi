@@ -1,0 +1,26 @@
+.header {
+  position: relative;
+  z-index: 10000;
+}
+
+.header__topline {
+  height: 102px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1C1A19;
+  padding: 0px 50px 0px 27px;
+}
+
+.header__links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__link {
+  margin-right: 15px;
+}
+
+.header__link:last-child {
+  margin-right: 0;
+}

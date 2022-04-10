@@ -1,40 +1,34 @@
-import './App.css';
+import './css/App.css';
 import React from 'react';
-import { ProfileWithAuth } from "./pages/profile/profile";
-import { Map } from "./pages/map/map";
-import { LoginWithAuth } from "./pages/login/login";
-import { Registration } from "./pages/registration/registration";
-import { withAuth } from './authContext';
+import Profile from "./pages/profile/profile";
+import Map from "./pages/map/map";
+import { LoginWithAuth } from "./pages/login";
+import Registration from "./pages/registration/registration";
 import PropTypes from 'prop-types';
+import { connect, useSelector } from 'react-redux';
+import { Routes, Route, Navigate } from "react-router-dom";
 
-const PAGES = {
-  map: (props) => <Map {...props} />,
-  profile: (props) => <ProfileWithAuth {...props} />,
-  loginPage: (props) => <LoginWithAuth {...props} />,
-  registration: (props) => <Registration {...props} />
+
+const ProtectedPage = ({ component }) => {
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+
+  return isLoggedIn ? component : <Navigate to='/' />
 }
 
+
 class App extends React.Component {
-  state = { page: "loginPage" };
 
-  unauthorize = (event) => {
-    event.preventDefault();
-    this.props.logOut();
-    this.navigateTo("loginPage")
-  }
-
-
-  navigateTo = (page) => {
-    if (this.props.isLoggedIn || page === "loginPage" || page === "registration") {
-      this.setState({ page });
-    } else {
-      this.setState({ page: "loginPage"});
-    }
-  }
   render() {
     return (
       <>
-        <section>{PAGES[this.state.page]({ navigate: this.navigateTo, unauthorize: this.unauthorize })}</section>
+        <section>
+          <Routes >
+            <Route exact path="/" element={<LoginWithAuth />} />
+            <Route exact path="/registration" element={<Registration />} />
+            <Route path='/map' element={<ProtectedPage component={<Map />} />} />
+            <Route path='/profile' element={<ProtectedPage component={<Profile />} />} />
+          </Routes>
+        </section>
       </>
     );
   }
@@ -43,4 +37,6 @@ class App extends React.Component {
 App.propTypes = {
   isLoggedIn: PropTypes.bool
 };
-export default withAuth(App);
+export default connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn })
+)(App);

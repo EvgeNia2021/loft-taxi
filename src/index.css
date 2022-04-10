@@ -5,12 +5,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+ul {
+  list-style-type: none;
+}
+
+button {
+  text-decoration: none;
+  border: medium none;
+  background: none;
+  cursor: pointer;
+}
+
+::placeholder {
+  color: #828282;
+  }
+
+ 
 
 .map-wrapper {
   position: relative;
@@ -24,4 +42,8 @@ code {
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+a {
+  text-decoration: none;
 }

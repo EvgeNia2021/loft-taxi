@@ -1,49 +1,33 @@
 import React, { Component } from "react";
-import { withAuth } from "../../authContext"
 import PropTypes from 'prop-types';
+import { connect } from "react-redux"
+import { Navigate } from "react-router-dom";
+import { Paper } from "@material-ui/core";
+import Logo from "../../components/svg/sideLogo"
+import { LinkNav } from "../../components/themeConverter/themeConverter"
+import { LoginForm } from "./loginForm"
+
 
 export class LoginPage extends Component {
-  authorize = (event) => {
-    event.preventDefault()
-    const { email, password } = event.target;
-    this.props.logIn(email.value, password.value)
-  }
-  goToProfilePage = (event) => {
-    event.preventDefault();
-    this.props.navigate("profile")
-  }
 
-  goToRegPage = (event) => {
-    event.preventDefault();
-    this.props.navigate("registration")
-  }
 
   render() {
-
     return (
       <>
-        {this.props.isLoggedIn ? (
-          <p>Вы авторизированы <button onClick={this.goToProfilePage}>Перейти в профиль</button></p>
-        ) : (
-          <div>
-            <form onSubmit={this.authorize}>
-              <h1 className="login__title">Войти</h1>
-              <label htmlFor="email">Email:</label>
-              <input id="email" type="email" name="email" size="16" />
-              <label htmlFor="password">Пароль:</label>
-              <input id="password" type="password" name="password" size="16" />
-              <div className="login__forgot">
-                Забыли пароль?
-              </div>
-              <button type="submit">
-
-                Войти
-              </button>
-              <div className="login__subtitle">
-                Новый пользователь?
-              </div>
-            </form>
-            <button onClick={this.goToRegPage}>Регистрация</button>
+        {this.props.isLoggedIn ? <Navigate to='/map' /> : (
+          <div className="login__container">
+            <Logo />
+            <div className="login__form">
+              <Paper elevation={3} className="login__paper">
+                <LoginForm />
+                <div className="login__new">
+                  <div className="subtitle">
+                    Новый пользователь?
+                  </div>
+                  <LinkNav to="/registration">Регистрация</LinkNav>
+                </div>
+              </Paper>
+            </div>
           </div>
         )}
       </>
@@ -53,7 +37,7 @@ export class LoginPage extends Component {
 
 LoginPage.propTypes = {
   isLoggedIn: PropTypes.bool,
-  logIn: PropTypes.func,
-  navigate: PropTypes.func,
 };
-export const LoginWithAuth = withAuth(LoginPage);
+export const LoginWithAuth = connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn, auth: state.auth })
+)(LoginPage);

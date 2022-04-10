@@ -1,27 +1,43 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
+import { Paper } from "@material-ui/core";
+import Logo from "../../components/svg/sideLogo"
+import { LinkNav } from "../../components/themeConverter/themeConverter"
+import { RegistrationForm } from "./registrationForm";
+import PropTypes from 'prop-types';
+import { connect } from "react-redux"
+import { Navigate } from "react-router-dom";
+import { registrate } from "../../actions";
 
 export class Registration extends Component {
   render() {
+
     return (
       <>
-        <h1 className="registration__title">Регистрация</h1>
-        <form>
-          <label htmlFor="email">Email*</label>
-          <input id="email" type="email" name="email" size="16" />
-          <label htmlFor="username">Как Вас зовут?*</label>
-          <input id="username" type="username" name="username" size="16" />
-          <label htmlFor="password">Придумайте пароль*</label>
-          <input id="password" type="password" name="password" size="16" />
-        </form>
-        <button onClick={() => this.props.navigate("map")}>
-          Зарегистрироваться
-        </button>
-        <div className="registration__subtitle">
-          Уже зарегистрированы?
-        </div>
-        <button onClick={() => this.props.navigate("loginPage")}>Войти</button>
+        {this.props.isLoggedIn ? <Navigate to='/profile' /> : (
+          <div className="login__container">
+            <Logo />
+            <div className="login__form">
+              <Paper elevation={3} className="registration__paper">
+                <RegistrationForm registrate={registrate} />
+                <div className="login__new">
+                  <div className="subtitle">
+                    Уже зарегистрированы?
+                  </div>
+                  <LinkNav to="/">Войти</LinkNav>
+                </div>
+              </Paper>
+            </div>
+          </div>
+        )}
       </>
     );
   }
 }
 
+Registration.propTypes = {
+  isLoggedIn: PropTypes.bool,
+};
+export default connect(
+  (state) => ({ isLoggedIn: state.register.isLoggedIn, register: state.register })
+)(Registration);

@@ -1,20 +1,24 @@
 import React from "react";
 import { Map } from "./map";
 import { render } from "@testing-library/react";
-import mapbox from "mapbox-gl";
+import { Provider } from "react-redux";
+import { MemoryRouter as Router } from "react-router-dom";
 
-jest.mock("mapbox-gl", () => ({
-  Map: jest.fn(() => ({ remove: () => {} })),
-}));
+jest.mock("./map", () => ({ Map: () => <>Map</> }));
 
 describe("Map", () => {
   it("map renders correctly", () => {
-    const { getByTestId } = render(<Map />);
-    expect(mapbox.Map).toHaveBeenCalledWith({
-      center: [12.33194, 45.43972],
-      container: getByTestId('map'),
-      style: "mapbox://styles/mapbox/streets-v9",
-      zoom: 12,
-    });
+    const { container } = render(<Provider
+      store={{
+        dispatch: () => { },
+        subscribe: () => { },
+        getState: () => { },
+      }}
+    >
+      <Router location={{}}>
+        <Map />
+      </Router>
+    </Provider>);
+    expect(container.innerHTML).toMatch("Map");
   });
-});
+})

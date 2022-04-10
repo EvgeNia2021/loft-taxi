@@ -1,40 +1,45 @@
 import React, { Component } from "react";
+import { logOut, removeFlag } from "../../actions"
+import { connect } from "react-redux"
+import { LinkNav } from "../themeConverter/themeConverter"
+import HorizontalLogo from "../svg/horizontalLogo"
+import { Link } from "react-router-dom";
 
 class Header extends Component {
+  unauthorize = (event) => {
+    event.preventDefault();
+    this.props.logOut();
+  };
+
   render() {
-    // const { navigateTo } = this.props
     return (
       <>
-        <header className="header">
-          <div className="container">
-            <div className="header__topline">
-              <div className="header__nav">
-                <nav>
-                  <ul>
-                    <li>
-                      <button onClick={() => this.props.navigate("map")}>
-                        Карта
-                      </button>
-                    </li>
-                    <li>
-                      <button onClick={() => this.props.navigate("profile")}>
-                        Профиль
-                      </button>
-                    </li>
-                    <li>
-                      <button onClick={this.props.unauthorize}>
-                        Выйти
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+        <div className="header">
+          <div className="header__topline">
+            <Link to="/map"><HorizontalLogo /></Link>
+            <div>
+              <nav>
+                <ul className="header__links">
+                  <li className="header__link">
+                    <LinkNav to="/map">Карта</LinkNav>
+                  </li>
+                  <li className="header__link">
+                    <LinkNav to="/profile">Профиль</LinkNav>
+                  </li>
+                  <li className="header__link">
+                    <LinkNav to="/login" onClick={this.unauthorize}>Выйти</LinkNav>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
-        </header>
+        </div>
       </>
     );
   }
 }
 
-export default Header;
+export const HeaderWithLinks = connect(
+  null,
+  { logOut, removeFlag }
+)(Header);

@@ -1,15 +1,25 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import App from "./App";
+import { Provider } from 'react-redux';
+import { MemoryRouter as Router } from "react-router-dom";
 
-jest.mock("./pages/profile/profile", () => ({ ProfileWithAuth: () => <div>Profile page</div> }));
-jest.mock("./pages/login/login", () => ({ LoginWithAuth: () => <div>Login page</div> }));
+jest.mock("./pages/login/login", () => ({ LoginWithAuth: () => <div>Please Login</div> }));
 
 describe("App", () => {
   it("renders correctly", () => {
-    const { container } = render(<App />);
-    expect(container.innerHTML).toMatch("Login page");
-  });
-
-
+    const { container } = render(
+      <Provider store={{
+        dispatch: () => { },
+        subscribe: () => { },
+        getState: () => ({ auth: { isLoggedIn: false } }),
+      }}>
+        <Router location={{}}>
+          <App />
+        </Router>
+      </Provider>
+    );
+    expect(container.innerHTML).toMatch("Please Login");
+  })
 });
+
