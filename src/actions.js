@@ -2,6 +2,7 @@ import { createAction } from "redux-actions";
 
 
 export const LOG_IN = "LOG_IN"
+export const AUTH_FAILURE = "AUTH_FAILURE";
 export const LOG_OUT = "LOG_OUT"
 export const AUTHORIZE = "AUTHORIZE"
 export const ADD_CARD = "ADD_CARD"
@@ -14,6 +15,7 @@ export const GET_CARD_REQUEST = "GET_CARD_REQUEST";
 export const GET_CARD_SUCCESS = "GET_CARD_SUCCESS";
 
 export const logIn = (token) => ({ type: LOG_IN, payload: token })
+export const authFailure = () => ({ type: AUTH_FAILURE });
 export const logOut = () => ({ type: LOG_OUT })
 export const authorize = (email, password) => ({
   type: AUTHORIZE, payload: { email, password },

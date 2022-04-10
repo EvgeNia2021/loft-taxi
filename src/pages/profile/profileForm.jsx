@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, FormLabel, Paper } from "@material-ui/core";
+import { Button, Input, FormLabel, Paper, TextField } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { addCard } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core"
 import CardLogo from "../../components/svg/cardLogo"
 import CardIcon from "../../components/svg/cardIcon"
 import MasterCircle from "../../components/svg/masterCircle";
+import InputMask from "react-input-mask";
 
 const useStyles = makeStyles({
   input: {
@@ -37,6 +38,11 @@ const useStyles = makeStyles({
   rightCircle: {
     position: "absolute",
     right: 60
+  },
+  cvcInput: {
+    width: "100%",
+    borderBottom: "1px solid #E0E0E0",
+    fontWeight: 700,
   }
 })
 
@@ -55,23 +61,48 @@ export const ProfileForm = ({ useDispatchHook = useDispatch }) => {
     dispatch(addCard(cardName, cardNumber, expiryDate, cvc, token))
   }
 
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="profile__container">
+    <form onSubmit={handleSubmit(onSubmit)} className="profile__container" >
       <div className="profile__form">
         <div className="profile__form-left">
           <div className="profile__group">
             <FormLabel className={classes.label} htmlFor="cardName">Имя владельца</FormLabel>
-            <Input {...register('cardName')} value={cardName} onChange={(e) => setCardName(e.target.value)} className={classes.input} id="cardName" name="cardName" size="16" required />
+            <Input  {...register('cardName')} value={cardName} onChange={(e) => setCardName(e.target.value)} className={classes.input} id="cardName" name="cardName" size="16" required type="text" />
+          
+                  
           </div>
           <div className="profile__group"><FormLabel className={classes.label} htmlFor="cardNumber">Номер карты</FormLabel>
             <Input {...register('cardNumber')} value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} className={classes.input} id="cardNumber" name="cardNumber" size="16" required />
           </div>
           <div className="profile__group2">
             <div className="profile__group"> <FormLabel className={classes.label} htmlFor="expiryDate">MM/YY</FormLabel>
-              <Input {...register('expiryDate')} value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} className={classes.input} id="expiryDate" name="expiryDate" size="16" required />
+              <Input  {...register('expiryDate', { maxLength: 5 })} value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} className={classes.input} id="expiryDate" name="expiryDate" size="16" required >
+              <TextField
+                    inputProps={{ maxLength: 5 }}
+                  />
+            </Input>
             </div>
-            <div className="profile__group"><FormLabel className={classes.label} htmlFor="cvc">CVC</FormLabel>
-              <Input {...register('cvc')} value={cvc} onChange={(e) => setCvc(e.target.value)} className={classes.input} id="cvc" name="cvc" size="16" required />
+            <div className="profile__group">
+              <FormLabel className={classes.label} htmlFor="cvc">CVC</FormLabel>
+              <InputMask
+                {...register('cvc')}
+                value={cvc}
+                onChange={(e) => setCvc(e.target.value)}
+                className={classes.input}
+                name="cvc"
+                mask="000"
+                maskChar={null}
+                disabled={false}
+              >
+                {(inputProps) => (
+                  <TextField
+                    inputProps={{ maxLength: 3 }}
+                    value={inputProps.cvc}
+                    {...inputProps}
+                  />
+                )}
+              </InputMask>
             </div>
           </div>
         </div>
